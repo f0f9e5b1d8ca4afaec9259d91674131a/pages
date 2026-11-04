@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-11-02T11:17:42.892939",
+  "last_update": "2026-11-04T00:04:39.655569",
   "market_last_date": "2026-10-23",
   "market_summary": "O mercado brasileiro segue atento ao cenário fiscal e movimentações de commodities.",
   "ibov": {
@@ -31,35 +31,12 @@
       },
       "period": "",
       "sources": [],
-      "updated_at": "2026-11-02T11:17:42.892939",
+      "updated_at": "2026-11-04T00:04:39.655569",
       "is_outdated": false,
       "last_close": 7.79,
       "daily_delta": 0.17851739788199694,
       "monthly_delta": 0.06275579809004084,
       "yearly_delta": 0.191131498470948,
-      "price_date": "2026-10-23"
-    },
-    "WHRL3.SA": {
-      "summary": "Sem notícias recentes de impacto encontradas nos principais canais financeiros para WHRL3.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 0,
-        "previous_status": "Sem menções recentes em recomendações",
-        "current_status": "Sem menções recentes em recomendações",
-        "trend_summary": "Não foram identificadas alterações relevantes nas carteiras recomendadas para WHRL3 nos últimos 15 dias."
-      },
-      "period": "",
-      "sources": [],
-      "updated_at": "2026-11-02T11:17:42.892939",
-      "is_outdated": false,
-      "last_close": 3.7,
-      "daily_delta": -0.043927648578811374,
-      "monthly_delta": 0.05714285714285716,
-      "yearly_delta": -0.1454965357967667,
       "price_date": "2026-10-23"
     }
   },
