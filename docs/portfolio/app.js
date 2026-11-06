@@ -12,7 +12,8 @@ class B3App {
     // this.GAS_URL = "https://script.google.com/macros/s/AKfycbyIQkk8nPe2ROYHPbMbvfm6EZV8TvSneHgnKovW7JoVxbMrVjF3Bs-0SG_Ps6uLk1NY5Q/exec";
 	this.GAS_URL = "https://script.google.com/macros/s/AKfycbx62T6RHS0G81LX-e2t_pKC-wBqejxVlIhAz8psCk_rivEYr83151m6zP-x0phpbF3u/exec";
 
-    this.portfolio = { name: 'Meu Portfólio', positions: [] };
+    this.portfolio = { name: 'Meu Portfólio', positions: [], wallets: ['Principal'] };
+    this.selectedWallet = 'all';
     this.user = null; // { username: '...' } if logged in
     this.assets = [];
     this.marketData = null;
@@ -88,8 +89,9 @@ class B3App {
 
   palette(n) {
     const base = [
-      '#4F46E5', '#059669', '#D97706', '#2563EB', '#9333EA',
-      '#06B6D4', '#E11D48', '#0284C7', '#7C3AED', '#10B981'
+      '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f97316',
+      '#eab308', '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6',
+      '#a855f7', '#d946ef',
     ];
     const out = [];
     for (let i = 0; i < n; i++) out.push(base[i % base.length]);
@@ -140,25 +142,42 @@ class B3App {
 
     this.showPage('monitor');
 
-    // Habilita a aba fundamentalista por padrão
+    // Reseta botões de abas para o padrão fundamentalista se houver dados, senão técnica
     const btnTech = this.$('btnMonitorTabTechnical');
     const btnFund = this.$('btnMonitorTabFundamental');
     const panelTech = this.$('monitorTabContentTechnical');
     const panelFund = this.$('monitorTabContentFundamental');
     const compContainer = this.$('monitorComparisonContainer');
 
-    if (btnFund) {
-      btnFund.classList.add('active');
-      btnFund.style.display = 'inline-block';
-    }
-    if (btnTech) btnTech.classList.remove('active');
-    if (panelFund) panelFund.style.display = 'flex';
-    if (panelTech) panelTech.style.display = 'none';
-    if (compContainer) compContainer.style.display = 'flex';
+    const hasFundamentalData = this.marketFinancials && this.marketFinancials.assets && this.marketFinancials.assets[tickerWithSA];
 
-    setTimeout(() => {
-      this.renderFundamentalAnalysis(tickerWithSA);
-    }, 450);
+    if (hasFundamentalData) {
+      if (btnFund) {
+        btnFund.classList.add('active');
+        btnFund.style.display = 'inline-block';
+      }
+      if (btnTech) btnTech.classList.remove('active');
+      if (panelFund) panelFund.style.display = 'flex';
+      if (panelTech) panelTech.style.display = 'none';
+      if (compContainer) compContainer.style.display = 'flex';
+
+      setTimeout(() => {
+        this.renderFundamentalAnalysis(tickerWithSA);
+      }, 450);
+    } else {
+      if (btnFund) {
+        btnFund.classList.remove('active');
+        btnFund.style.display = 'none'; // Esconde o botão se não houver dados
+      }
+      if (btnTech) btnTech.classList.add('active');
+      if (panelFund) panelFund.style.display = 'none';
+      if (panelTech) panelTech.style.display = 'block';
+      if (compContainer) compContainer.style.display = 'none';
+
+      setTimeout(() => {
+        this.renderChart(tickerClean);
+      }, 450);
+    }
   }
 
   addMonitorComparisonTicker() {
@@ -262,6 +281,7 @@ class B3App {
 
     // 3. Análise inicial para liberar o dashboard rapidamente
     this.setSplashMessage('Sincronizando portfólio...');
+    this.renderWalletSelectors();
     await this.runAnalysis();
     this.renderPositions();
 
@@ -364,6 +384,46 @@ class B3App {
     this.$('btnRequestExpertAnalysis').addEventListener('click', () => this.requestExpertAnalysis());
     this.$('btnAddBulk').addEventListener('click', () => this.openBulkModal());
     this.$('btnVoltarMonitor').addEventListener('click', () => this.showPage(this.previousPage));
+
+    // Wallet selectors & management bindings
+    document.addEventListener('change', (e) => {
+      if (e.target && e.target.classList.contains('wallet-selector')) {
+        this.setWallet(e.target.value);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      const btnManage = e.target.closest('.btn-manage-wallets');
+      if (btnManage) {
+        this.openWalletModal();
+      }
+    });
+
+    const btnCreateWallet = this.$('btnCreateWallet');
+    if (btnCreateWallet) {
+      btnCreateWallet.addEventListener('click', () => {
+        const input = this.$('inputNewWalletName');
+        if (input && input.value.trim()) {
+          if (this.addWallet(input.value.trim())) {
+            input.value = '';
+            this.renderWalletManagerList();
+          }
+        }
+      });
+    }
+
+    const walletClose = this.$('walletModalClose');
+    if (walletClose) walletClose.addEventListener('click', () => this.closeWalletModal());
+
+    const walletOk = this.$('walletModalOk');
+    if (walletOk) walletOk.addEventListener('click', () => this.closeWalletModal());
+
+    const walletOverlay = this.$('walletModalOverlay');
+    if (walletOverlay) {
+      walletOverlay.addEventListener('click', (e) => {
+        if (e.target === walletOverlay) this.closeWalletModal();
+      });
+    }
 
     // Bind para abas do Monitor de Análise Avançada
     const btnTech = this.$('btnMonitorTabTechnical');
@@ -701,9 +761,6 @@ class B3App {
         await this.runAnalysis();
         this.renderPositions();
         this.showPage('dashboard');
-
-        // Carregar histórico completo para o membro logado
-        await this.loadMarketData(false);
       } else {
         this.toast(data.error || 'Erro no login', 'error');
       }
@@ -912,6 +969,46 @@ class B3App {
     this.$('bulkModalOverlay').addEventListener('click', e => {
       if (e.target === this.$('bulkModalOverlay')) this.closeBulkModal();
     });
+
+    // All Transactions modal bindings
+    const btnViewAllTx = this.$('btnViewAllTransactions');
+    if (btnViewAllTx) {
+      btnViewAllTx.addEventListener('click', () => this.openAllTransactionsModal());
+    }
+
+    const btnDownloadTpl = this.$('btnDownloadTemplateCSV');
+    if (btnDownloadTpl) {
+      btnDownloadTpl.addEventListener('click', () => this.downloadCSVTemplate());
+    }
+
+    const btnExportCSV = this.$('btnExportCSV');
+    if (btnExportCSV) {
+      btnExportCSV.addEventListener('click', () => this.exportToCSV());
+    }
+
+    const btnAllTxClose = this.$('allTransactionsModalClose');
+    if (btnAllTxClose) btnAllTxClose.addEventListener('click', () => this.closeAllTransactionsModal());
+
+    const btnAllTxCancel = this.$('btnAllTxCancel');
+    if (btnAllTxCancel) btnAllTxCancel.addEventListener('click', () => this.closeAllTransactionsModal());
+
+    const btnAllTxSave = this.$('btnAllTxSave');
+    if (btnAllTxSave) btnAllTxSave.addEventListener('click', () => this.saveAllTransactionsFromTable());
+
+    const btnTxAddRow = this.$('btnTxAddRow');
+    if (btnTxAddRow) btnTxAddRow.addEventListener('click', () => this.addDraftRow());
+
+    const searchTxInput = this.$('searchTxInput');
+    if (searchTxInput) {
+      searchTxInput.addEventListener('input', () => this.renderAllTransactionsTable());
+    }
+
+    const allTxOverlay = this.$('allTransactionsModalOverlay');
+    if (allTxOverlay) {
+      allTxOverlay.addEventListener('click', (e) => {
+        if (e.target === allTxOverlay) this.closeAllTransactionsModal();
+      });
+    }
   }
 
   openModal(editIndex = null, defaultType = 'buy') {
@@ -943,9 +1040,20 @@ class B3App {
     tickerInput.value = '';
     this.$('tickerWarning').style.display = 'none';
 
+    this.normalizePortfolio();
+    const posWalletSelect = this.$('posWallet');
+    if (posWalletSelect) {
+      posWalletSelect.innerHTML = this.portfolio.wallets.map(w => `<option value="${w}">${w}</option>`).join('');
+      const defaultWallet = (this.selectedWallet !== 'all' && this.portfolio.wallets.includes(this.selectedWallet))
+        ? this.selectedWallet
+        : this.portfolio.wallets[0];
+      posWalletSelect.value = defaultWallet;
+    }
+
     if (editIndex !== null && this.portfolio.positions[editIndex]) {
       const pos = this.portfolio.positions[editIndex];
       this.$('posType').value = pos.type || 'buy';
+      if (posWalletSelect && pos.wallet) posWalletSelect.value = pos.wallet;
       tickerInput.value = pos.ticker;
       this.$('posQty').value = pos.quantity;
       this.$('posPrice').value = pos.purchase_price;
@@ -1074,9 +1182,18 @@ class B3App {
       options += `<option value="${a.ticker}">${a.ticker}</option>`;
     });
 
+    this.normalizePortfolio();
+    let walletOptions = this.portfolio.wallets.map(w => {
+      const selected = (this.selectedWallet !== 'all' && this.selectedWallet === w) ? 'selected' : '';
+      return `<option value="${w}" ${selected}>${w}</option>`;
+    }).join('');
+
     const today = new Date().toISOString().slice(0, 10);
 
     tr.innerHTML = `
+      <td>
+        <select class="bulk-wallet" style="width: 100%">${walletOptions}</select>
+      </td>
       <td>
         <select class="bulk-type" style="width: 100%">
           <option value="buy">Compra</option>
@@ -1126,6 +1243,7 @@ class B3App {
     const tempPortfolio = JSON.parse(JSON.stringify(this.portfolio.positions));
 
     for (const row of rows) {
+      const wallet = row.querySelector('.bulk-wallet') ? row.querySelector('.bulk-wallet').value : (this.portfolio.wallets[0] || 'Principal');
       const type = row.querySelector('.bulk-type').value;
       const ticker = row.querySelector('.bulk-ticker').value;
       const qty = parseInt(row.querySelector('.bulk-qty').value, 10);
@@ -1154,7 +1272,8 @@ class B3App {
           ticker,
           quantity: qty,
           purchase_price: price,
-          purchase_date: date || new Date().toISOString().slice(0, 10)
+          purchase_date: date || new Date().toISOString().slice(0, 10),
+          wallet
         };
         newPositions.push(newPos);
         tempPortfolio.push(newPos);
@@ -1220,6 +1339,8 @@ class B3App {
       // Se já temos dados carregados (essential), mesclamos com o novo histórico completo
       if (this.marketData && !essentialOnly) {
         this.marketData = this.mergeMarketData([this.marketData, newData]);
+        // Re-analisar para habilitar ferramentas que dependem do histórico completo
+        this.runAnalysis();
       } else {
         this.marketData = newData;
       }
@@ -1227,18 +1348,6 @@ class B3App {
       // 4. Se for visitante, garantir restrição de 2 anos no histórico para economia de memória
       if (!this.user) {
         this.restrictHistoricalData(2);
-      }
-
-      // Re-analisar e re-renderizar para habilitar ferramentas e gráficos que dependem do histórico completo
-      if (!essentialOnly) {
-        await this.runAnalysis();
-        this.renderPositions();
-        if (this.currentPage === 'monitor' && this.currentMonitorTicker) {
-          this.renderFundamentalAnalysis(this.currentMonitorTicker);
-        }
-        if (this.currentPage === 'rebalance' && this.rebalanceResults) {
-          this.renderRebalance();
-        }
       }
 
       console.log('Dados de mercado carregados e mesclados com sucesso');
@@ -1271,36 +1380,26 @@ class B3App {
 
   mergeMarketData(dataList) {
     // Usamos o primeiro arquivo como base (geralmente market_data.json, o mais recente)
-    const base = JSON.parse(JSON.stringify(dataList[0]));
-    const mergedAssets = base.assets || {};
+    const base = dataList[0];
+    const mergedAssets = { ...base.assets };
 
     // Percorrer os outros arquivos para mesclar histórico e dividendos
     for (let i = 1; i < dataList.length; i++) {
       const current = dataList[i];
 
-      if (!current || !current.assets) continue;
-
       Object.keys(current.assets).forEach(ticker => {
         if (!mergedAssets[ticker]) {
-          // Se o ativo não existe na base, adicionamos
-          mergedAssets[ticker] = JSON.parse(JSON.stringify(current.assets[ticker]));
+          // Se o ativo não existe na base, adicionamos (caso raro, mas possível)
+          mergedAssets[ticker] = current.assets[ticker];
           return;
         }
 
         const baseAsset = mergedAssets[ticker];
         const extraAsset = current.assets[ticker];
 
-        if (!baseAsset.history) {
-          baseAsset.history = { dates: [], closes: [], volumes: [] };
-        }
-
         // Mesclar Histórico
         if (extraAsset.history && extraAsset.history.dates) {
           this.mergeAssetHistory(baseAsset.history, extraAsset.history);
-        }
-
-        if (!baseAsset.dividends) {
-          baseAsset.dividends = { dates: [], values: [] };
         }
 
         // Mesclar Dividendos
@@ -1371,7 +1470,38 @@ class B3App {
     }
   }
 
-  renderMarketNews() {
+  getSentimentBadgeHTML(sentiment) {
+    if (!sentiment) return '';
+    const score = sentiment.score != null ? Number(sentiment.score) : 0;
+    const label = (sentiment.label || 'neutro').toLowerCase();
+
+    let bg = '#F1F5F9';
+    let color = '#475569';
+    let border = '#CBD5E1';
+    let text = 'Neutro';
+    let icon = '●';
+
+    if (label === 'inclusao_carteira' || label === 'positivo' || score > 0.2) {
+      bg = '#ECFDF5';
+      color = '#059669';
+      border = '#A7F3D0';
+      text = label === 'inclusao_carteira' ? 'Inclusão em Carteira' : 'Positivo';
+      icon = '▲';
+    } else if (label === 'exclusao_carteira' || label === 'negativo' || score < -0.2) {
+      bg = '#FEF2F2';
+      color = '#DC2626';
+      border = '#FCA5A5';
+      text = label === 'exclusao_carteira' ? 'Exclusão de Carteira' : 'Negativo';
+      icon = '▼';
+    }
+
+    const scoreStr = (score >= 0 ? '+' : '') + score.toFixed(2);
+    return `<span class="badge" style="background: ${bg}; color: ${color}; border: 1px solid ${border}; padding: 0.35rem 0.65rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.35rem;">
+      <span>${icon}</span> <span>${text}</span> <small style="opacity: 0.8; font-weight: 600;">(${scoreStr})</small>
+    </span>`;
+  }
+
+    renderMarketNews() {
     if (!this.marketNews) {
       this.$('marketInsightText').textContent = 'Insights indisponíveis no momento.';
       return;
@@ -1449,6 +1579,14 @@ class B3App {
         outdatedBadge = `<div class="news-outdated-label">⚠️ Notícias de período anterior ao dia atual</div>`;
       }
 
+      let sentimentBadge = '';
+      if (data.sentiment) {
+        sentimentBadge = `<div style="margin: 0.4rem 0 0.2rem 0; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          ${this.getSentimentBadgeHTML(data.sentiment)}
+          ${data.recommendation_trend_15d && (data.recommendation_trend_15d.inclusions_count > 0 || data.recommendation_trend_15d.exclusions_count > 0) ? `<span style="font-size: 0.72rem; padding: 0.2rem 0.45rem; border-radius: 4px; background: rgba(0,0,0,0.04); color: var(--text-muted); border: 1px solid var(--border-color);">15d: <strong style="color:var(--green)">+${data.recommendation_trend_15d.inclusions_count || 0}</strong> / <strong style="color:var(--red)">-${data.recommendation_trend_15d.exclusions_count || 0}</strong></span>` : ''}
+        </div>`;
+      }
+
       const displayDate = data.price_date ? data.price_date.split('-').reverse().join('/') : new Date(data.updated_at).toLocaleDateString('pt-BR');
 
       let tickerClean = this.escapeHTML(ticker.replace('.SA', ''));
@@ -1468,6 +1606,7 @@ class B3App {
           </div>
           ${performanceHtml}
         </div>
+        ${sentimentBadge}
         ${outdatedBadge}
         <div class="news-card-summary">${this.escapeHTML(data.summary)}</div>
         <button class="btn btn-outline btn-sm" onclick="app.showAssetNews('${this.escapeHTML(ticker)}')" style="margin-top:auto">Ver Mais</button>
@@ -1476,7 +1615,7 @@ class B3App {
     });
   }
 
-  showAssetNews(ticker) {
+  async showAssetNews(ticker) {
     if (!this.marketNews || !this.marketNews.assets[ticker]) {
       this.toast('Notícias não encontradas para este ativo.', 'warning');
       return;
@@ -1496,23 +1635,118 @@ class B3App {
     if (data.period) updateText += ` | Período: ${data.period}`;
     this.$('newsModalUpdateDate').textContent = updateText;
 
+    // Render Sentiment Badge
+    const sentimentContainer = this.$('newsModalSentimentBadge');
+    if (sentimentContainer) {
+      sentimentContainer.innerHTML = this.getSentimentBadgeHTML(data.sentiment);
+    }
+
+    // Render Recommendation Trend 15D Box
+    const recBox = this.$('newsModalRecommendationBox');
+    if (recBox) {
+      const recData = data.recommendation_trend_15d;
+      if (recData && !isIbov) {
+        recBox.style.display = 'block';
+        recBox.innerHTML = `
+          <div style="font-size: 0.75rem; font-weight: 600; color: var(--accent-light); margin-bottom: 0.5rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 0.4rem;">
+            Varredura de citações (15 dias)
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 0.5rem 0.75rem; border-radius: 6px; text-align: center;">
+              <span style="display: block; font-size: 0.7rem; color: var(--green); font-weight: 600;">Inclusões / Otimismo</span>
+              <strong style="font-size: 1.1rem; color: var(--green);">${recData.inclusions_count || 0}</strong>
+            </div>
+            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.5rem 0.75rem; border-radius: 6px; text-align: center;">
+              <span style="display: block; font-size: 0.7rem; color: var(--red); font-weight: 600;">Exclusões / Cautela</span>
+              <strong style="font-size: 1.1rem; color: var(--red);">${recData.exclusions_count || 0}</strong>
+            </div>
+          </div>
+          ${recData.current_status ? `<div style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.4rem;"><strong>Status Atual:</strong> ${this.escapeHTML(recData.current_status)}</div>` : ''}
+          ${recData.trend_summary ? `<div style="font-size: 0.85rem; color: var(--text-primary); line-height: 1.4; background: rgba(0,0,0,0.02); padding: 0.5rem; border-radius: 4px; border-left: 3px solid var(--accent);">${this.escapeHTML(recData.trend_summary)}</div>` : ''}
+        `;
+      } else {
+        recBox.style.display = 'none';
+      }
+    }
+
     // Handle summary text and outdated disclaimer
     const textElement = this.$('newsModalText');
     if (textElement) {
-        // Transforma o container em flexbox para neutralizar margens invisíveis do topo
         textElement.style.display = 'flex';
         textElement.style.flexDirection = 'column';
         textElement.style.justifyContent = 'flex-start';
-        textElement.style.gap = '0px'; // Garante espaço zero entre os elementos filhos
+        textElement.style.gap = '0px';
         textElement.style.paddingTop = '0px';
         textElement.style.marginTop = '0px';
       if (data.is_outdated) {
         textElement.innerHTML = `
           <div class="news-outdated-label" style="margin-bottom: 1rem;">AVISO: Este resumo não necessariamente retrata o desempenho do dia, pois não houve fontes disponíveis para a data atual.</div>
           <div style="white-space: pre-wrap; margin-top: 0;">${this.escapeHTML(data.summary).trim()}</div><br>
-        `.replace(/>\s+</g, '><'); // Remove os espaços e quebras de linha gerados pelas crases;
+        `.replace(/>\s+</g, '><');
       } else {
         textElement.textContent = data.summary;
+      }
+    }
+
+    // Render Historical Sentiment & Recommendation Timeline
+    const historyBox = this.$('newsModalHistoryBox');
+    if (historyBox) {
+      if (!this.marketNewsHistory) {
+        try {
+          const histRes = await fetch(`./data/market_news_history.json?t=${new Date().getTime()}`);
+          if (histRes.ok) {
+            this.marketNewsHistory = await histRes.json();
+          }
+        } catch (e) {
+          console.warn('Erro ao carregar histórico de notícias:', e);
+        }
+      }
+
+      if (this.marketNewsHistory && this.marketNewsHistory.history) {
+        const histObj = this.marketNewsHistory.history;
+        const availableDates = Object.keys(histObj).sort().reverse();
+        const historyEntries = [];
+
+        availableDates.forEach(dStr => {
+          if (histObj[dStr] && histObj[dStr][ticker]) {
+            historyEntries.push({ date: dStr, data: histObj[dStr][ticker] });
+          }
+        });
+
+        if (historyEntries.length > 0 && !isIbov) {
+          historyBox.style.display = 'block';
+          let itemsHtml = historyEntries.map(entry => {
+            const dateFormatted = entry.date.split('-').reverse().join('/');
+            const badge = this.getSentimentBadgeHTML(entry.data.sentiment);
+            const sumText = this.escapeHTML(entry.data.summary || '');
+            const recTrend = entry.data.recommendation_trend_15d || {};
+            const inc = recTrend.inclusions_count || 0;
+            const exc = recTrend.exclusions_count || 0;
+
+            return `
+              <div style="padding: 0.65rem 0.85rem; border-radius: 6px; background: rgba(0,0,0,0.02); border: 1px solid var(--border-color); font-size: 0.82rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.4rem;">
+                  <strong style="color: var(--accent); font-size: 0.85rem;">📅 ${dateFormatted}</strong>
+                  ${badge}
+                </div>
+                ${(inc > 0 || exc > 0) ? `<div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">Citações: <span style="color:var(--green)">+${inc} inclusões</span> / <span style="color:var(--red)">-${exc} exclusões</span></div>` : ''}
+              </div>
+            `;
+          }).join('');
+
+          historyBox.innerHTML = `
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.6rem; letter-spacing: 0.5px; display: flex; align-items: center; gap: 0.4rem;">
+              Histórico
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 220px; overflow-y: auto; padding-right: 0.25rem;">
+              ${itemsHtml}
+            </div>
+          `;
+        } else {
+          historyBox.style.display = 'none';
+        }
+      } else {
+        historyBox.style.display = 'none';
       }
     }
 
@@ -1573,79 +1807,12 @@ class B3App {
     try {
       const url = `./data/market_financials.json?t=${new Date().getTime()}`;
       const res = await fetch(url);
-      if (res.ok) {
-        this.marketFinancials = await res.json();
-        console.log('✓ Dados fundamentalistas carregados com sucesso!');
-        return;
-      }
+      if (!res.ok) return;
+      this.marketFinancials = await res.json();
+      console.log('✓ Dados fundamentalistas carregados com sucesso!');
     } catch (err) {
-      console.warn('Carregamento de market_financials.json falhou, gerando estrutura a partir dos ativos.');
+      console.warn('Demonstrativos fundamentalistas não disponíveis ainda.');
     }
-    this.buildFallbackFinancials();
-  }
-
-  buildFallbackFinancials() {
-    if (this.marketFinancials && this.marketFinancials.assets) return;
-
-    const assetsMap = {};
-    const sectorAverages = {};
-
-    this.assets.forEach(a => {
-      const tickerSA = a.ticker;
-      const mkt = this.marketData && this.marketData.assets && this.marketData.assets[tickerSA];
-      const news = this.marketNews && this.marketNews.assets && this.marketNews.assets[tickerSA];
-      const lastPrice = news?.last_close || mkt?.last_price || 10.0;
-
-      assetsMap[tickerSA] = {
-        ticker: tickerSA,
-        name: a.name,
-        stats: {
-          sector: a.sector || 'Geral',
-          industry: a.description || 'Geral',
-          market_cap: (mkt?.stats?.avg_price || 50) * 10000000,
-          forward_pe: 8.5,
-          price_to_book: 1.2,
-          dividend_yield: 0.065,
-          roe: 0.15,
-          operating_margin_current: 0.18,
-          debt_to_equity_current: 1.2,
-          current_liquidity_current: 1.5,
-          ev_to_ebitda: 6.2,
-          last_price: lastPrice
-        },
-        historical: {
-          revenue: { '2021': 500000000, '2022': 650000000, '2023': 800000000 },
-          operating_margin: { '2021': 0.15, '2022': 0.17, '2023': 0.19 },
-          current_liquidity: { '2021': 1.3, '2022': 1.4, '2023': 1.5 },
-          debt_to_equity: { '2021': 1.4, '2022': 1.3, '2023': 1.2 }
-        }
-      };
-
-      const sec = a.sector || 'Geral';
-      if (!sectorAverages[sec]) {
-        sectorAverages[sec] = {
-          stats: {
-            roe: 0.14,
-            operating_margin_current: 0.16,
-            debt_to_equity_current: 1.3,
-            current_liquidity_current: 1.4,
-            ev_to_ebitda: 6.5,
-            forward_pe: 9.0,
-            price_to_book: 1.3
-          },
-          historical: {
-            revenue: { '2021': 450000000, '2022': 550000000, '2023': 700000000 },
-            operating_margin: { '2021': 0.14, '2022': 0.15, '2023': 0.16 }
-          }
-        };
-      }
-    });
-
-    this.marketFinancials = {
-      assets: assetsMap,
-      sector_averages: sectorAverages
-    };
-    console.log('✓ Estrutura fundamentalista gerada com sucesso para', Object.keys(assetsMap).length, 'ativos.');
   }
 
   setSummaryPeriod(period) {
@@ -1721,7 +1888,206 @@ class B3App {
     }
   }
 
+  normalizePortfolio() {
+    if (!this.portfolio) {
+      this.portfolio = { name: 'Meu Portfólio', positions: [], wallets: ['Principal'] };
+    }
+    if (!Array.isArray(this.portfolio.wallets) || this.portfolio.wallets.length === 0) {
+      this.portfolio.wallets = ['Principal'];
+    }
+    if (!Array.isArray(this.portfolio.positions)) {
+      this.portfolio.positions = [];
+    }
+    this.portfolio.positions.forEach(pos => {
+      if (!pos.wallet || typeof pos.wallet !== 'string' || !pos.wallet.trim()) {
+        pos.wallet = this.portfolio.wallets[0] || 'Principal';
+      } else {
+        pos.wallet = pos.wallet.trim();
+        if (!this.portfolio.wallets.includes(pos.wallet)) {
+          this.portfolio.wallets.push(pos.wallet);
+        }
+      }
+    });
+  }
+
+  getActivePositions() {
+    this.normalizePortfolio();
+    if (this.selectedWallet === 'all') {
+      return this.portfolio.positions;
+    }
+    return this.portfolio.positions.filter(pos => (pos.wallet || 'Principal') === this.selectedWallet);
+  }
+
+  getWallets() {
+    this.normalizePortfolio();
+    return this.portfolio.wallets;
+  }
+
+  addWallet(walletName) {
+    const name = (walletName || '').trim();
+    if (!name) return false;
+    this.normalizePortfolio();
+    if (this.portfolio.wallets.includes(name)) {
+      this.toast('Esta carteira já existe!', 'warning');
+      return false;
+    }
+    this.portfolio.wallets.push(name);
+    this.savePortfolio();
+    this.renderWalletSelectors();
+    this.toast(`Carteira "${name}" criada com sucesso!`, 'success');
+    return true;
+  }
+
+  renameWallet(oldName, newName) {
+    const trimmedNew = (newName || '').trim();
+    if (!trimmedNew || oldName === trimmedNew) return false;
+    this.normalizePortfolio();
+    if (this.portfolio.wallets.includes(trimmedNew)) {
+      this.toast('Já existe uma carteira com este nome!', 'warning');
+      return false;
+    }
+    const idx = this.portfolio.wallets.indexOf(oldName);
+    if (idx !== -1) {
+      this.portfolio.wallets[idx] = trimmedNew;
+      this.portfolio.positions.forEach(p => {
+        if (p.wallet === oldName) p.wallet = trimmedNew;
+      });
+      if (this.selectedWallet === oldName) {
+        this.selectedWallet = trimmedNew;
+      }
+      this.savePortfolio();
+      this.runAnalysis().then(() => {
+        this.renderAll();
+      });
+      this.toast(`Carteira renomeada para "${trimmedNew}"!`, 'success');
+      return true;
+    }
+    return false;
+  }
+
+  deleteWallet(walletName) {
+    this.normalizePortfolio();
+    if (this.portfolio.wallets.length <= 1) {
+      this.toast('Você deve manter pelo menos uma carteira!', 'warning');
+      return false;
+    }
+    const idx = this.portfolio.wallets.indexOf(walletName);
+    if (idx === -1) return false;
+
+    this.portfolio.wallets.splice(idx, 1);
+    this.portfolio.positions = this.portfolio.positions.filter(p => p.wallet !== walletName);
+
+    if (this.selectedWallet === walletName) {
+      this.selectedWallet = 'all';
+    }
+    this.savePortfolio();
+    this.runAnalysis().then(() => {
+      this.renderAll();
+    });
+    this.toast(`Carteira "${walletName}" excluída!`, 'info');
+    return true;
+  }
+
+  renderWalletSelectors() {
+    this.normalizePortfolio();
+    const selectors = document.querySelectorAll('.wallet-selector');
+    selectors.forEach(select => {
+      const currentVal = this.selectedWallet;
+      select.innerHTML = `
+        <option value="all" ${currentVal === 'all' ? 'selected' : ''}>🌐 Todas as Carteiras</option>
+        ${this.portfolio.wallets.map(w => `<option value="${w}" ${currentVal === w ? 'selected' : ''}>💼 ${w}</option>`).join('')}
+      `;
+      select.value = currentVal;
+    });
+
+    this.renderWalletManagerList();
+  }
+
+  setWallet(wallet) {
+    this.selectedWallet = wallet;
+    this.renderWalletSelectors();
+    this.runAnalysis().then(() => {
+      this.renderAll();
+    });
+  }
+
+  renderAll() {
+    this.renderDashboard();
+    this.renderPositions();
+    if (this.currentPage === 'dividends') this.renderDividendsPage();
+    if (this.currentPage === 'taxes') this.renderTaxReport();
+    if (this.currentPage === 'rebalance') this.renderRebalance();
+    if (this.currentPage === 'barsi') this.renderBarsi();
+    if (this.currentPage === 'screener') this.renderScreener();
+  }
+
+  openWalletModal() {
+    const modal = this.$('walletModalOverlay');
+    if (!modal) return;
+    this.renderWalletManagerList();
+    const input = this.$('inputNewWalletName');
+    if (input) input.value = '';
+    modal.classList.add('active');
+  }
+
+  closeWalletModal() {
+    const modal = this.$('walletModalOverlay');
+    if (modal) modal.classList.remove('active');
+  }
+
+  renderWalletManagerList() {
+    const container = this.$('walletListContainer');
+    if (!container) return;
+    this.normalizePortfolio();
+
+    container.innerHTML = this.portfolio.wallets.map(w => {
+      const count = this.portfolio.positions.filter(p => (p.wallet || 'Principal') === w).length;
+      const isOnlyOne = this.portfolio.wallets.length <= 1;
+      return `
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0.75rem; background: var(--bg-primary); border: 1px solid var(--border-color, var(--border-glass, #E2E8F0)); border-radius: 6px; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1;">
+            <span style="font-weight: 600; color: var(--text-primary); font-size: 0.95rem;">${w}</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); background: var(--bg-card); padding: 0.15rem 0.45rem; border-radius: 4px; border: 1px solid var(--border-color, var(--border-glass, #E2E8F0));">
+              ${count} ${count === 1 ? 'registro' : 'registros'}
+            </span>
+          </div>
+          <div style="display: flex; gap: 0.4rem;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="app.promptRenameWallet('${w}')" title="Renomear">
+              ✏️
+            </button>
+            ${!isOnlyOne ? `
+              <button type="button" class="btn btn-danger btn-sm" onclick="app.confirmDeleteWallet('${w}')" title="Excluir">
+                🗑️
+              </button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  promptRenameWallet(walletName) {
+    const newName = prompt(`Novo nome para a carteira "${walletName}":`, walletName);
+    if (newName && newName.trim() && newName.trim() !== walletName) {
+      this.renameWallet(walletName, newName.trim());
+      this.renderWalletManagerList();
+    }
+  }
+
+  confirmDeleteWallet(walletName) {
+    const count = this.portfolio.positions.filter(p => (p.wallet || 'Principal') === walletName).length;
+    let msg = `Tem certeza que deseja excluir a carteira "${walletName}"?`;
+    if (count > 0) {
+      msg += `\nATENÇÃO: Ela possui ${count} transações que serão excluídas juntamente!`;
+    }
+    if (confirm(msg)) {
+      this.deleteWallet(walletName);
+      this.renderWalletManagerList();
+    }
+  }
+
   savePortfolio() {
+    this.normalizePortfolio();
     if (this.user) {
       this.savePortfolioServer();
     } else {
@@ -1732,9 +2098,10 @@ class B3App {
   consolidatePortfolio() {
     const consolidated = {};
 
-    // Group transactions by ticker
+    // Group transactions by ticker using filtered active positions
+    const activePositions = this.getActivePositions();
     const grouped = {};
-    this.portfolio.positions.forEach((pos, index) => {
+    activePositions.forEach((pos, index) => {
       if (!grouped[pos.ticker]) grouped[pos.ticker] = [];
       grouped[pos.ticker].push({ ...pos, originalIndex: index, originalQty: pos.quantity });
     });
@@ -1846,7 +2213,7 @@ class B3App {
   }
 
   getAveragePriceAndQtyOnDate(ticker, date) {
-    const transactions = this.portfolio.positions.filter(p => p.ticker === ticker);
+    const transactions = this.getActivePositions().filter(p => p.ticker === ticker);
     const sorted = [...transactions].sort((a, b) => {
       const cmp = a.purchase_date.localeCompare(b.purchase_date);
       if (cmp !== 0) return cmp;
@@ -1888,7 +2255,7 @@ class B3App {
     const asset = this.marketData && this.marketData.assets && this.marketData.assets[ticker];
     if (!asset || !asset.dividends || !asset.dividends.dates) return 0;
 
-    const transactions = this.portfolio.positions.filter(p => p.ticker === ticker);
+    const transactions = this.getActivePositions().filter(p => p.ticker === ticker);
     const eventInvestments = [];
 
     asset.dividends.dates.forEach((divDate, divIdx) => {
@@ -2093,9 +2460,10 @@ class B3App {
   /* ------------------------------------------------------------------
      CRUD — Positions
   ------------------------------------------------------------------ */
-  getTickerBalance(ticker, excludeIndex = null) {
+  getTickerBalance(ticker, excludeIndex = null, wallet = null) {
     let balance = 0;
-    this.portfolio.positions.forEach((pos, idx) => {
+    const positions = wallet ? this.portfolio.positions.filter(p => (p.wallet || 'Principal') === wallet) : this.getActivePositions();
+    positions.forEach((pos, idx) => {
       if (idx === excludeIndex) return;
       if (pos.ticker === ticker) {
         const type = pos.type || 'buy';
@@ -2120,6 +2488,8 @@ class B3App {
     const irrf = parseFloat(this.$('posIRRF').value) || 0;
     if (!ticker || !qty || !price) return;
 
+    const walletSelect = this.$('posWallet');
+    const wallet = walletSelect ? walletSelect.value : (this.portfolio.wallets[0] || 'Principal');
     const pos = {
       type,
       ticker,
@@ -2127,14 +2497,15 @@ class B3App {
       purchase_price: price,
       purchase_date: date || new Date().toISOString().slice(0, 10),
       costs,
-      irrf
+      irrf,
+      wallet
     };
 
     // Validation: Sale cannot exceed current balance
     if (type === 'sell') {
-      const currentBalance = this.getTickerBalance(ticker, this.editIndex);
+      const currentBalance = this.getTickerBalance(ticker, this.editIndex, wallet);
       if (qty > currentBalance) {
-        this.toast(`Saldo insuficiente de ${ticker.replace('.SA', '')} para realizar a venda. Saldo atual: ${currentBalance}`, 'error');
+        this.toast(`Saldo insuficiente de ${ticker.replace('.SA', '')} na carteira "${wallet}" para realizar a venda. Saldo atual: ${currentBalance}`, 'error');
         return;
       }
     }
@@ -2673,7 +3044,7 @@ class B3App {
             data: currentValues,
             backgroundColor: colors,
             borderWidth: 2,
-            borderColor: '#FFFFFF',
+            borderColor: '#0b0f19',
             hoverOffset: 8,
             weight: 2
           },
@@ -2682,7 +3053,7 @@ class B3App {
             data: investedValues,
             backgroundColor: colors.map(c => c + '88'), // Semi-transparent
             borderWidth: 2,
-            borderColor: '#FFFFFF',
+            borderColor: '#0b0f19',
             hoverOffset: 8,
             weight: 1
           }
@@ -2693,11 +3064,8 @@ class B3App {
         maintainAspectRatio: false,
         cutout: '40%',
         plugins: {
-          legend: { position: 'bottom', labels: { color: '#475569', padding: 16, font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } } },
+          legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 16, font: { family: 'Inter', size: 11 } } },
           tooltip: {
-            backgroundColor: '#0F172A',
-            titleColor: '#F8FAFC',
-            bodyColor: '#F8FAFC',
             callbacks: {
               label: context => {
                 const label = context.dataset.label || '';
@@ -2731,13 +3099,13 @@ class B3App {
           {
             label: 'Lucro Efetivo (R$)',
             data: effectiveValues,
-            backgroundColor: '#059669',
+            backgroundColor: '#22c55e',
             borderRadius: 4
           },
           {
             label: 'Lucro Projetado (R$)',
             data: projectedValues,
-            backgroundColor: '#4F46E5',
+            backgroundColor: '#6366f1',
             borderRadius: 4
           }
         ],
@@ -2747,13 +3115,13 @@ class B3App {
         maintainAspectRatio: false,
         scales: {
           x: {
-            ticks: { color: '#475569', font: { family: 'Plus Jakarta Sans', size: 10, weight: '500' } },
+            ticks: { color: '#94a3b8', font: { family: 'Inter', size: 10 } },
             grid: { display: false },
             stacked: true
           },
           y: {
-            ticks: { color: '#475569', callback: v => 'R$ ' + this.formatNumber(v, 0) },
-            grid: { color: 'rgba(0, 0, 0, 0.05)' },
+            ticks: { color: '#94a3b8', callback: v => 'R$ ' + this.formatNumber(v, 0) },
+            grid: { color: 'rgba(255,255,255,0.05)' },
             stacked: true
           },
         },
@@ -2761,12 +3129,9 @@ class B3App {
           legend: {
             display: true,
             position: 'top',
-            labels: { color: '#475569', font: { size: 11, weight: '600' } }
+            labels: { color: '#94a3b8', font: { size: 11 } }
           },
           tooltip: {
-            backgroundColor: '#0F172A',
-            titleColor: '#F8FAFC',
-            bodyColor: '#F8FAFC',
             callbacks: {
               label: ctx => `${ctx.dataset.label}: R$ ${this.formatNumber(ctx.raw, 2)}`
             }
@@ -3028,8 +3393,8 @@ class B3App {
           {
             label: `Rentabilidade Projetada (${formatPct(lastProj)})`,
             data: projectedRentabilityValues,
-            borderColor: '#4F46E5', // Indigo
-            borderWidth: 2,
+            borderColor: '#6366f1', // Indigo/violet
+            borderWidth: 1.5,
             pointRadius: 0,
             fill: false,
             tension: 0.1
@@ -3037,8 +3402,8 @@ class B3App {
           {
             label: `TIR efetiva da carteira (${formatPctAA(lastEff)})`,
             data: effectiveRentabilityValues,
-            borderColor: '#059669', // Emerald Green
-            borderWidth: 2,
+            borderColor: '#22c55e', // Green
+            borderWidth: 1.5,
             pointRadius: 0,
             fill: false,
             tension: 0.1
@@ -3046,7 +3411,7 @@ class B3App {
           {
             label: `Taxa de Atratividade (${formatPct(lastAtr)})`,
             data: atratividadeValues,
-            borderColor: '#D97706', // Amber/Yellow
+            borderColor: '#fbbf24', // Amber/Yellow
             borderWidth: 1.5,
             pointRadius: 0,
             fill: false,
@@ -3055,7 +3420,7 @@ class B3App {
           {
             label: `BVSP (Ibovespa) (${formatPct(lastBvsp)})`,
             data: bvspValues,
-            borderColor: '#2563EB', // Blue
+            borderColor: '#3b82f6', // Blue
             borderWidth: 1.5,
             pointRadius: 0,
             fill: false,
@@ -3064,7 +3429,7 @@ class B3App {
           {
             label: 'Ref',
             data: Array(plotDates.length).fill(0),
-            borderColor: '#CBD5E1',
+            borderColor: 'rgba(255, 255, 255, 0.25)',
             borderWidth: 1,
             borderDash: [4, 4],
             pointRadius: 0,
@@ -3077,12 +3442,12 @@ class B3App {
         maintainAspectRatio: false,
         scales: {
           x: {
-            ticks: { color: '#475569', font: { family: 'Plus Jakarta Sans', size: 10, weight: '500' } },
-            grid: { color: 'rgba(0, 0, 0, 0.04)' }
+            ticks: { color: '#94a3b8', font: { family: 'Inter', size: 10 } },
+            grid: { color: 'rgba(255,255,255,0.02)' }
           },
           y: {
-            ticks: { color: '#475569', callback: v => v.toFixed(1) + '%' },
-            grid: { color: 'rgba(0, 0, 0, 0.06)' }
+            ticks: { color: '#94a3b8', callback: v => v.toFixed(1) + '%' },
+            grid: { color: 'rgba(255,255,255,0.05)' }
           }
         },
         plugins: {
@@ -3090,8 +3455,8 @@ class B3App {
             display: true,
             position: 'top',
             labels: {
-              color: '#475569',
-              font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
+              color: '#94a3b8',
+              font: { family: 'Inter', size: 11 },
               filter: (item) => item.text !== 'Ref'
             }
           },
@@ -3308,15 +3673,9 @@ class B3App {
                 <button class="btn btn-danger btn-sm btn-position-action" onclick="app.openModal(null, 'sell'); app.$('posTicker').value='${tickerClean}'; app.validateTicker();" style="flex: 1; padding: 0.4rem; justify-content: center; font-size: 0.75rem;">Vender</button>
               </div>
               <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; width: 100%;">
-                <button class="btn btn-outline btn-sm btn-position-action" onclick="app.showMonitor('${tickerClean}')" style="flex: 1.2; padding: 0.4rem 0.5rem; font-size: 0.75rem; justify-content: center;" title="Análise Fundamentalista">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Fundamentalista
-                </button>
-                <button class="btn btn-outline btn-sm btn-position-action" onclick="app.manageTransactions('${item.ticker}')" style="flex: 1; padding: 0.4rem 0.5rem; font-size: 0.75rem; justify-content: center;" title="Transações e Configurações">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Histórico
-                </button>
-                <button class="btn btn-outline btn-sm btn-position-action" onclick="app.showAssetNews('${item.ticker}')" style="flex: 1; padding: 0.4rem 0.5rem; font-size: 0.75rem; justify-content: center;" title="Notícias IA">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg> Notícias
-                </button>
+                <button class="btn btn-outline btn-sm btn-position-action" onclick="app.showMonitor('${tickerClean}')" style="flex: 1.2; padding: 0.4rem 0.6rem; font-size: 0.75rem;" title="Análise Fundamentalista">📊 Fundamentalista</button>
+                <button class="btn btn-outline btn-sm btn-position-action" onclick="app.manageTransactions('${item.ticker}')" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.75rem;" title="Transações e Configurações">⚙️ Config/Hist</button>
+                <button class="btn btn-outline btn-sm btn-position-action" onclick="app.showAssetNews('${item.ticker}')" style="flex: 1; padding: 0.4rem 0.6rem; font-size: 0.75rem;" title="Notícias IA">📰 Notícias</button>
               </div>
             </div>
           </div>
@@ -3476,6 +3835,245 @@ class B3App {
   closeTransactionModal() {
     const el = document.getElementById('dynamicModalContainer');
     if (el) el.remove();
+  }
+
+  /* ------------------------------------------------------------------
+     Tabela de Edição de Todas as Transações
+  ------------------------------------------------------------------ */
+  openAllTransactionsModal() {
+    const modal = this.$('allTransactionsModalOverlay');
+    if (!modal) return;
+    this.normalizePortfolio();
+    this.tableDraftPositions = JSON.parse(JSON.stringify(this.portfolio.positions));
+    const searchInput = this.$('searchTxInput');
+    if (searchInput) searchInput.value = '';
+    this.renderAllTransactionsTable();
+    modal.classList.add('active');
+  }
+
+  closeAllTransactionsModal() {
+    const modal = this.$('allTransactionsModalOverlay');
+    if (modal) modal.classList.remove('active');
+    this.tableDraftPositions = null;
+  }
+
+  renderAllTransactionsTable() {
+    const tbody = this.$('allTransactionsTableBody');
+    const badge = this.$('txCountBadge');
+    if (!tbody || !this.tableDraftPositions) return;
+
+    const searchTerm = (this.$('searchTxInput') ? this.$('searchTxInput').value : '').toLowerCase().trim();
+    const wallets = this.portfolio.wallets || ['Principal'];
+
+    let rowsHtml = '';
+    let visibleCount = 0;
+
+    this.tableDraftPositions.forEach((tx, idx) => {
+      const tickerClean = (tx.ticker || '').toUpperCase();
+      const walletName = tx.wallet || 'Principal';
+      if (searchTerm) {
+        const matchTicker = tickerClean.toLowerCase().includes(searchTerm);
+        const matchWallet = walletName.toLowerCase().includes(searchTerm);
+        if (!matchTicker && !matchWallet) return;
+      }
+
+      visibleCount++;
+      const isBuy = (tx.type || 'buy') === 'buy';
+
+      const walletSelectHtml = `
+        <select class="tx-input tx-row-wallet" data-index="${idx}" style="font-size: 0.82rem;">
+          ${wallets.map(w => `<option value="${w}" ${w === walletName ? 'selected' : ''}>${w}</option>`).join('')}
+        </select>
+      `;
+
+      rowsHtml += `
+        <tr data-index="${idx}">
+          <td>
+            <input type="date" class="tx-input tx-row-date" data-index="${idx}" value="${tx.purchase_date || ''}">
+          </td>
+          <td>
+            <input type="text" class="tx-input tx-row-ticker" data-index="${idx}" value="${tickerClean}" placeholder="Ex: PETR4" style="font-weight: 600; text-transform: uppercase;">
+          </td>
+          <td>
+            <select class="tx-input tx-row-type" data-index="${idx}">
+              <option value="buy" ${isBuy ? 'selected' : ''}>Compra</option>
+              <option value="sell" ${!isBuy ? 'selected' : ''}>Venda</option>
+            </select>
+          </td>
+          <td>
+            <input type="number" class="tx-input tx-row-qty" data-index="${idx}" value="${tx.quantity || 0}" min="1">
+          </td>
+          <td>
+            <input type="number" class="tx-input tx-row-price" data-index="${idx}" value="${tx.purchase_price || 0}" step="0.01" min="0">
+          </td>
+          <td>
+            <input type="number" class="tx-input tx-row-costs" data-index="${idx}" value="${tx.costs || 0}" step="0.01" min="0">
+          </td>
+          <td>
+            <input type="number" class="tx-input tx-row-irrf" data-index="${idx}" value="${tx.irrf || 0}" step="0.01" min="0">
+          </td>
+          <td>
+            ${walletSelectHtml}
+          </td>
+          <td style="text-align: center;">
+            <button type="button" class="btn btn-danger btn-sm" onclick="app.deleteDraftRow(${idx})" title="Excluir Linha" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      `;
+    });
+
+    if (visibleCount === 0) {
+      rowsHtml = `<tr><td colspan="9" class="empty-state" style="text-align: center; padding: 2rem;">Nenhuma transação encontrada.</td></tr>`;
+    }
+
+    tbody.innerHTML = rowsHtml;
+    if (badge) {
+      badge.textContent = `${visibleCount} de ${this.tableDraftPositions.length} transações`;
+    }
+  }
+
+  addDraftRow() {
+    if (!this.tableDraftPositions) return;
+    const defaultWallet = (this.selectedWallet !== 'all' && this.portfolio.wallets.includes(this.selectedWallet))
+      ? this.selectedWallet
+      : (this.portfolio.wallets[0] || 'Principal');
+
+    this.tableDraftPositions.unshift({
+      purchase_date: new Date().toISOString().slice(0, 10),
+      ticker: '',
+      type: 'buy',
+      quantity: 100,
+      purchase_price: 10.00,
+      costs: 0,
+      irrf: 0,
+      wallet: defaultWallet
+    });
+
+    this.renderAllTransactionsTable();
+  }
+
+  deleteDraftRow(idx) {
+    if (!this.tableDraftPositions || idx < 0 || idx >= this.tableDraftPositions.length) return;
+    this.tableDraftPositions.splice(idx, 1);
+    this.renderAllTransactionsTable();
+  }
+
+  saveAllTransactionsFromTable() {
+    if (!this.tableDraftPositions) return;
+
+    const rows = document.querySelectorAll('#allTransactionsTableBody tr');
+    let hasError = false;
+
+    for (const row of rows) {
+      const idxAttr = row.getAttribute('data-index');
+      if (idxAttr === null) continue;
+      const idx = parseInt(idxAttr, 10);
+      if (isNaN(idx) || !this.tableDraftPositions[idx]) continue;
+
+      const dateEl = row.querySelector('.tx-row-date');
+      const tickerEl = row.querySelector('.tx-row-ticker');
+      const typeEl = row.querySelector('.tx-row-type');
+      const qtyEl = row.querySelector('.tx-row-qty');
+      const priceEl = row.querySelector('.tx-row-price');
+      const costsEl = row.querySelector('.tx-row-costs');
+      const irrfEl = row.querySelector('.tx-row-irrf');
+      const walletEl = row.querySelector('.tx-row-wallet');
+
+      let ticker = (tickerEl ? tickerEl.value : '').toUpperCase().trim();
+      if (!ticker) {
+        this.toast('Todos os ativos precisam de um Ticker preenchido.', 'error');
+        hasError = true;
+        break;
+      }
+      if (!ticker.endsWith('.SA')) ticker += '.SA';
+
+      const qty = parseInt(qtyEl ? qtyEl.value : 0, 10);
+      const price = parseFloat(priceEl ? priceEl.value : 0);
+      if (isNaN(qty) || qty <= 0 || isNaN(price) || price < 0) {
+        this.toast(`Preencha quantidade e preço válidos para o ativo ${ticker}.`, 'error');
+        hasError = true;
+        break;
+      }
+
+      this.tableDraftPositions[idx] = {
+        purchase_date: (dateEl && dateEl.value) || new Date().toISOString().slice(0, 10),
+        ticker,
+        type: typeEl ? typeEl.value : 'buy',
+        quantity: qty,
+        purchase_price: price,
+        costs: parseFloat(costsEl ? costsEl.value : 0) || 0,
+        irrf: parseFloat(irrfEl ? irrfEl.value : 0) || 0,
+        wallet: (walletEl && walletEl.value) || this.portfolio.wallets[0] || 'Principal'
+      };
+    }
+
+    if (hasError) return;
+
+    this.portfolio.positions = this.tableDraftPositions;
+    this.normalizePortfolio();
+    this.savePortfolio();
+    this.closeAllTransactionsModal();
+    this.runAnalysis().then(() => {
+      this.renderAll();
+    });
+    this.toast('Transações salvas com sucesso!', 'success');
+  }
+
+  downloadCSVTemplate() {
+    const headers = 'Data,Ticker,Tipo,Quantidade,Preco,Custos,IRRF,Carteira';
+    const sampleRows = [
+      '2024-01-15,PETR4,buy,100,36.50,0.00,0.00,Principal',
+      '2024-02-20,VALE3,buy,50,68.20,1.50,0.00,Principal',
+      '2024-03-10,PETR4,sell,50,39.00,0.50,0.05,Principal',
+      '2024-04-05,BBAS3,buy,100,27.30,0.00,0.00,Carteira Radar'
+    ];
+    const csvContent = [headers, ...sampleRows].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'modelo_importacao_carteira.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    this.toast('Modelo CSV baixado com sucesso!', 'success');
+  }
+
+  exportToCSV() {
+    this.normalizePortfolio();
+    const positionsToExport = this.getActivePositions();
+    if (!positionsToExport || positionsToExport.length === 0) {
+      this.toast('Não há transações para exportar na seleção atual.', 'warning');
+      return;
+    }
+
+    const headers = 'Data,Ticker,Tipo,Quantidade,Preco,Custos,IRRF,Carteira';
+    const rows = positionsToExport.map(p => {
+      const tickerClean = (p.ticker || '').replace('.SA', '');
+      const type = p.type || 'buy';
+      const qty = p.quantity || 0;
+      const price = (p.purchase_price != null ? p.purchase_price : 0).toFixed(2);
+      const costs = (p.costs != null ? p.costs : 0).toFixed(2);
+      const irrf = (p.irrf != null ? p.irrf : 0).toFixed(2);
+      const wallet = p.wallet || 'Principal';
+      return `${p.purchase_date},${tickerClean},${type},${qty},${price},${costs},${irrf},${wallet}`;
+    });
+
+    const csvContent = [headers, ...rows].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const walletLabel = this.selectedWallet === 'all' ? 'todas_carteiras' : this.selectedWallet.toLowerCase().replace(/\s+/g, '_');
+    a.download = `carteira_${walletLabel}_${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    this.toast(`${positionsToExport.length} transações exportadas com sucesso!`, 'success');
   }
 
   /* ------------------------------------------------------------------
@@ -3705,7 +4303,7 @@ class B3App {
           },
           {
             data: avgLine,
-            borderColor: 'rgba(100, 116, 139, 0.5)',
+            borderColor: 'rgba(255, 255, 255, 0.7)',
             borderWidth: 1.0,
             borderDash: [5, 2],
             pointRadius: 0,
@@ -3837,7 +4435,7 @@ class B3App {
           {
             label: 'Ref',
             data: zeros,
-            borderColor: 'rgba(100, 116, 139, 0.4)',
+            borderColor: 'rgba(255, 255, 255, 0.25)',
             borderWidth: 0.8,
             borderDash: [3, 3],
             pointRadius: 0,
@@ -4146,10 +4744,14 @@ class B3App {
     const reader = new FileReader();
     reader.onload = async (e) => {
       const text = e.target.result;
-      const lines = text.split('\n');
+      const lines = text.split(/\r?\n/);
       const newPositions = [];
 
-      // Skip header
+      this.normalizePortfolio();
+      const fallbackWallet = (this.selectedWallet !== 'all' && this.portfolio.wallets.includes(this.selectedWallet))
+        ? this.selectedWallet
+        : (this.portfolio.wallets[0] || 'Principal');
+
       for (let i = 1; i < lines.length; i++) {
         const line = lines[i].trim();
         if (!line) continue;
@@ -4157,27 +4759,47 @@ class B3App {
         const cols = line.split(',');
         if (cols.length < 5) continue;
 
-        // Formato esperado: Data,Ticker,Tipo,Qtd,Preço,Custos,IRRF
-        // Ex: 2024-05-10,PETR4,buy,100,35.50,1.50,0
-        const [date, ticker, type, qty, price, costs, irrf] = cols;
+        const date = cols[0] ? cols[0].trim() : '';
+        const ticker = cols[1] ? cols[1].trim() : '';
+        const type = cols[2] ? cols[2].trim().toLowerCase() : 'buy';
+        const qty = parseInt(cols[3], 10);
+        const price = parseFloat(cols[4]);
+        const costs = cols[5] ? parseFloat(cols[5]) || 0 : 0;
+        const irrf = cols[6] ? parseFloat(cols[6]) || 0 : 0;
+        const walletCol = cols[7] ? cols[7].trim() : '';
+        const wallet = walletCol || fallbackWallet;
+
+        if (!date || !ticker || isNaN(qty) || isNaN(price)) continue;
+
+        const fullTicker = ticker.toUpperCase().endsWith('.SA') ? ticker.toUpperCase() : ticker.toUpperCase() + '.SA';
+        const opType = (type === 'v' || type === 'sell' || type === 'venda') ? 'sell' : 'buy';
 
         newPositions.push({
           purchase_date: date,
-          ticker: ticker.toUpperCase().endsWith('.SA') ? ticker.toUpperCase() : ticker.toUpperCase() + '.SA',
-          type: type.toLowerCase() === 'v' || type.toLowerCase() === 'sell' ? 'sell' : 'buy',
-          quantity: parseInt(qty),
-          purchase_price: parseFloat(price),
-          costs: parseFloat(costs) || 0,
-          irrf: parseFloat(irrf) || 0
+          ticker: fullTicker,
+          type: opType,
+          quantity: qty,
+          purchase_price: price,
+          costs: costs,
+          irrf: irrf,
+          wallet: wallet
         });
+
+        if (!this.portfolio.wallets.includes(wallet)) {
+          this.portfolio.wallets.push(wallet);
+        }
       }
 
       if (newPositions.length > 0) {
         this.portfolio.positions.push(...newPositions);
+        this.normalizePortfolio();
         this.savePortfolio();
+        this.renderWalletSelectors();
         await this.runAnalysis();
-        this.renderPositions();
-        this.toast(`${newPositions.length} registros importados!`, 'success');
+        this.renderAll();
+        this.toast(`${newPositions.length} registros importados com sucesso!`, 'success');
+      } else {
+        this.toast('Nenhum registro válido encontrado no arquivo CSV.', 'warning');
       }
     };
     reader.readAsText(file);
@@ -4569,7 +5191,7 @@ class B3App {
         datasets.push({
           label: ticker.replace('.SA', ''),
           data: mainBase100,
-          borderColor: '#1E3A8A',
+          borderColor: '#ffffff',
           borderWidth: 3,
           pointRadius: 0,
           fill: false,
@@ -4642,12 +5264,12 @@ class B3App {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { position: 'top', labels: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' } } },
+              legend: { position: 'top', labels: { color: '#f3f4f6', font: { size: 11 } } },
               tooltip: { mode: 'index', intersect: false }
             },
             scales: {
-              x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569', maxTicksLimit: 10 } },
-              y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } }
+              x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af', maxTicksLimit: 10 } },
+              y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
             }
           }
         });
@@ -4696,7 +5318,7 @@ class B3App {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { labels: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } },
+              legend: { labels: { color: '#f3f4f6' } },
               tooltip: {
                 callbacks: {
                   label: (context) => {
@@ -4706,8 +5328,8 @@ class B3App {
               }
             },
             scales: {
-              x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-              y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } }
+              x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+              y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } }
             }
           }
         });
@@ -4735,7 +5357,7 @@ class B3App {
               {
                 label: ticker.replace('.SA', ''),
                 data: assetVals,
-                borderColor: '#1E3A8A', // Deep corporate navy
+                borderColor: '#eab308', // Amarelo brilhante
                 borderWidth: 3,
                 fill: false,
                 tension: 0.15
@@ -4743,7 +5365,7 @@ class B3App {
               {
                 label: `Média do Segmento`,
                 data: industryVals,
-                borderColor: '#059669', // Emerald
+                borderColor: '#3b82f6',
                 borderDash: [5, 5],
                 borderWidth: 2,
                 fill: false,
@@ -4755,7 +5377,7 @@ class B3App {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { labels: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } },
+              legend: { labels: { color: '#f3f4f6' } },
               tooltip: {
                 callbacks: {
                   label: (context) => `${context.dataset.label}: ${this.formatNumber(context.raw, 2)}%`
@@ -4763,8 +5385,8 @@ class B3App {
               }
             },
             scales: {
-              x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { color: '#475569' } },
-              y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { color: '#475569', callback: value => value + '%' } }
+              x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+              y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af', callback: value => value + '%' } }
             }
           }
         });
@@ -4800,8 +5422,8 @@ class B3App {
             {
               label: 'Liquidez Corrente',
               data: values,
-              backgroundColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#D97706' : '#E2E8F0')),
-              borderColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#B45309' : '#CBD5E1')),
+              backgroundColor: topPeers.map(p => p.ticker === ticker ? 'rgba(59, 130, 246, 0.8)' : (this.userComparisonTickers.includes(p.ticker) ? 'rgba(251, 191, 36, 0.8)' : 'rgba(255, 255, 255, 0.25)')),
+              borderColor: topPeers.map(p => p.ticker === ticker ? '#3b82f6' : (this.userComparisonTickers.includes(p.ticker) ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)')),
               borderWidth: 1,
               barThickness: 24
             }
@@ -4840,8 +5462,8 @@ class B3App {
             }
           },
           scales: {
-            x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-            y: { grid: { display: false }, ticks: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { display: false }, ticks: { color: '#f3f4f6' } }
           }
         }
       });
@@ -4859,8 +5481,8 @@ class B3App {
               {
                 label: 'Histórico',
                 data: values,
-                borderColor: '#2563EB',
-                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
                 borderWidth: 3,
                 fill: true,
                 tension: 0.15
@@ -4872,8 +5494,8 @@ class B3App {
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: {
-              x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-              y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } }
+              x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+              y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } }
             }
           }
         });
@@ -4897,8 +5519,8 @@ class B3App {
             {
               label: 'ROE (%)',
               data: values,
-              backgroundColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#D97706' : (values[topPeers.indexOf(p)] < 0 ? '#FEF2F2' : '#E2E8F0'))),
-              borderColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#B45309' : (values[topPeers.indexOf(p)] < 0 ? '#DC2626' : '#CBD5E1'))),
+              backgroundColor: topPeers.map(p => p.ticker === ticker ? 'rgba(59, 130, 246, 0.8)' : (this.userComparisonTickers.includes(p.ticker) ? 'rgba(251, 191, 36, 0.8)' : (values[topPeers.indexOf(p)] < 0 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255, 255, 255, 0.25)'))),
+              borderColor: topPeers.map(p => p.ticker === ticker ? '#3b82f6' : (this.userComparisonTickers.includes(p.ticker) ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)')),
               borderWidth: 1,
               barThickness: 24
             }
@@ -4936,8 +5558,8 @@ class B3App {
             }
           },
           scales: {
-            x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-            y: { grid: { display: false }, ticks: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { display: false }, ticks: { color: '#f3f4f6' } }
           }
         }
       });
@@ -4971,8 +5593,8 @@ class B3App {
             {
               label: 'Dívida/Patrimônio (%)',
               data: values,
-              backgroundColor: topPeers.map(p => p.ticker === ticker ? '#4F46E5' : (this.userComparisonTickers.includes(p.ticker) ? '#D97706' : '#E2E8F0')),
-              borderColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#B45309' : '#CBD5E1')),
+              backgroundColor: topPeers.map(p => p.ticker === ticker ? 'rgba(59, 130, 246, 0.8)' : (this.userComparisonTickers.includes(p.ticker) ? 'rgba(251, 191, 36, 0.8)' : (values[topPeers.indexOf(p)] < 0 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255, 255, 255, 0.25)'))),
+              borderColor: topPeers.map(p => p.ticker === ticker ? '#3b82f6' : (this.userComparisonTickers.includes(p.ticker) ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)')),
               borderWidth: 1,
               barThickness: 24
             }
@@ -5010,8 +5632,8 @@ class B3App {
             }
           },
           scales: {
-            x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-            y: { grid: { display: false }, ticks: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { display: false }, ticks: { color: '#f3f4f6' } }
           }
         }
       });
@@ -5029,8 +5651,8 @@ class B3App {
               {
                 label: 'Dívida/Patrimônio (%)',
                 data: values,
-                borderColor: '#DC2626',
-                backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                borderColor: '#e11d48', // Vermelho/Rosa escuro
+                backgroundColor: 'rgba(225, 29, 72, 0.1)',
                 borderWidth: 3,
                 fill: true,
                 tension: 0.15
@@ -5042,8 +5664,8 @@ class B3App {
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
             scales: {
-              x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-              y: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569', callback: value => value + '%' } }
+              x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+              y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af', callback: value => value + '%' } }
             }
           }
         });
@@ -5067,8 +5689,8 @@ class B3App {
             {
               label: 'EV/EBITDA',
               data: values,
-              backgroundColor: topPeers.map(p => p.ticker === ticker ? '#4F46E5' : (this.userComparisonTickers.includes(p.ticker) ? '#D97706' : (values[topPeers.indexOf(p)] < 0 ? '#FEF2F2' : '#E2E8F0'))),
-              borderColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#B45309' : (values[topPeers.indexOf(p)] < 0 ? '#DC2626' : '#CBD5E1'))),
+              backgroundColor: topPeers.map(p => p.ticker === ticker ? 'rgba(59, 130, 246, 0.8)' : (this.userComparisonTickers.includes(p.ticker) ? 'rgba(251, 191, 36, 0.8)' : (values[topPeers.indexOf(p)] < 0 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255, 255, 255, 0.25)'))),
+              borderColor: topPeers.map(p => p.ticker === ticker ? '#3b82f6' : (this.userComparisonTickers.includes(p.ticker) ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)')),
               borderWidth: 1,
               barThickness: 24
             }
@@ -5106,8 +5728,8 @@ class B3App {
             }
           },
           scales: {
-            x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-            y: { grid: { display: false }, ticks: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { display: false }, ticks: { color: '#f3f4f6' } }
           }
         }
       });
@@ -5130,8 +5752,8 @@ class B3App {
             {
               label: 'P/L',
               data: values,
-              backgroundColor: topPeers.map(p => p.ticker === ticker ? '#4F46E5' : (this.userComparisonTickers.includes(p.ticker) ? '#D97706' : (values[topPeers.indexOf(p)] < 0 ? '#FEF2F2' : '#E2E8F0'))),
-              borderColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#B45309' : (values[topPeers.indexOf(p)] < 0 ? '#DC2626' : '#CBD5E1'))),
+              backgroundColor: topPeers.map(p => p.ticker === ticker ? 'rgba(59, 130, 246, 0.8)' : (this.userComparisonTickers.includes(p.ticker) ? 'rgba(251, 191, 36, 0.8)' : (values[topPeers.indexOf(p)] < 0 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255, 255, 255, 0.25)'))),
+              borderColor: topPeers.map(p => p.ticker === ticker ? '#3b82f6' : (this.userComparisonTickers.includes(p.ticker) ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)')),
               borderWidth: 1,
               barThickness: 24
             }
@@ -5169,8 +5791,8 @@ class B3App {
             }
           },
           scales: {
-            x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-            y: { grid: { display: false }, ticks: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { display: false }, ticks: { color: '#f3f4f6' } }
           }
         }
       });
@@ -5193,8 +5815,8 @@ class B3App {
             {
               label: 'P/VP',
               data: values,
-              backgroundColor: topPeers.map(p => p.ticker === ticker ? '#4F46E5' : (this.userComparisonTickers.includes(p.ticker) ? '#D97706' : (values[topPeers.indexOf(p)] < 0 ? '#FEF2F2' : '#E2E8F0'))),
-              borderColor: topPeers.map(p => p.ticker === ticker ? '#1E3A8A' : (this.userComparisonTickers.includes(p.ticker) ? '#B45309' : (values[topPeers.indexOf(p)] < 0 ? '#DC2626' : '#CBD5E1'))),
+              backgroundColor: topPeers.map(p => p.ticker === ticker ? 'rgba(59, 130, 246, 0.8)' : (this.userComparisonTickers.includes(p.ticker) ? 'rgba(251, 191, 36, 0.8)' : (values[topPeers.indexOf(p)] < 0 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255, 255, 255, 0.25)'))),
+              borderColor: topPeers.map(p => p.ticker === ticker ? '#3b82f6' : (this.userComparisonTickers.includes(p.ticker) ? '#fbbf24' : 'rgba(255, 255, 255, 0.4)')),
               borderWidth: 1,
               barThickness: 24
             }
@@ -5232,8 +5854,8 @@ class B3App {
             }
           },
           scales: {
-            x: { grid: { color: 'rgba(0, 0, 0, 0.05)' }, ticks: { color: '#475569' } },
-            y: { grid: { display: false }, ticks: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: '600' } } }
+            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#9ca3af' } },
+            y: { grid: { display: false }, ticks: { color: '#f3f4f6' } }
           }
         }
       });
@@ -5770,79 +6392,16 @@ onForecastTermsCheckboxChange() {
     this.filterForecastData();
   }
 
-  getForecastMarketDetails(item) {
-    if (!this.marketData || !this.marketData.assets) {
-      return { hasNewer: false, fechamento_ult_dia: null, delta_rs: null, delta_pct: null, sparklineCloses: null };
-    }
-
-    const asset = this.marketData.assets[item.tickerSA] ||
-                  this.marketData.assets[item.ticker] ||
-                  this.marketData.assets[item.rawTicker];
-
-    if (!asset || !asset.history || !asset.history.dates || !asset.history.closes || asset.history.dates.length === 0) {
-      return { hasNewer: false, fechamento_ult_dia: null, delta_rs: null, delta_pct: null, sparklineCloses: null };
-    }
-
-    let isoForecastDate = item.data_ult_cotacao;
-    if (isoForecastDate && isoForecastDate.includes('/')) {
-      const parts = isoForecastDate.split('/');
-      if (parts.length === 3) {
-        isoForecastDate = `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
-      }
-    }
-
-    const dates = asset.history.dates;
-    const closes = asset.history.closes;
-    const lastDate = dates[dates.length - 1];
-
-    if (!lastDate || lastDate <= isoForecastDate) {
-      return { hasNewer: false, fechamento_ult_dia: null, delta_rs: null, delta_pct: null, sparklineCloses: null };
-    }
-
-    const fechamento_ult_dia = closes[closes.length - 1];
-    const precoBase = item.preco;
-    const delta_rs = fechamento_ult_dia - precoBase;
-    const delta_pct = precoBase > 0 ? (delta_rs / precoBase) * 100 : 0;
-
-    let startIdx = dates.indexOf(isoForecastDate);
-    if (startIdx === -1) {
-      for (let i = dates.length - 1; i >= 0; i--) {
-        if (dates[i] <= isoForecastDate) {
-          startIdx = i;
-          break;
-        }
-      }
-    }
-
-    let sparklineCloses = [];
-    if (startIdx !== -1) {
-      sparklineCloses = closes.slice(startIdx);
-      if (sparklineCloses.length > 0 && item.preco) {
-        sparklineCloses[0] = item.preco;
-      }
-    } else {
-      sparklineCloses = [item.preco, ...closes];
-    }
-
-    return {
-      hasNewer: true,
-      fechamento_ult_dia,
-      delta_rs,
-      delta_pct,
-      sparklineCloses
-    };
-  }
-
  getStatisticalBias(item) {
     if (item.forca_sinal === 'BAIXA') {
       return {
         label: 'Inconsistente',
         val: 'INCONSISTENTE',
-        color: '#64748B',
-        bg: 'rgba(100, 116, 139, 0.15)',
-        border: '#CBD5E1',
-        arrow: '',
-        badgeHtml: `<span class="badge" style="background: #F1F5F9; color: #64748B; border: 1px solid #CBD5E1; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Inconsistente</span>`
+        color: '#9ca3af',
+        bg: 'rgba(156, 163, 175, 0.25)',
+        border: 'rgba(156, 163, 175, 0.5)',
+        arrow: '⚪',
+        badgeHtml: `<span class="badge" style="background: rgba(156, 163, 175, 0.2); color: #9ca3af; border: 1px solid rgba(156, 163, 175, 0.4); padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Inconsistente</span>`
       };
     }
     if (item.forca_sinal === 'MEDIA') {
@@ -5850,21 +6409,21 @@ onForecastTermsCheckboxChange() {
         return {
           label: 'Positivo',
           val: 'POSITIVO',
-          color: '#D97706',
-          bg: '#FFFBEB',
-          border: '#FCD34D',
-          arrow: '',
-          badgeHtml: `<span class="badge" style="background: #FFFBEB; color: #D97706; border: 1px solid #FCD34D; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Positivo</span>`
+          color: '#facc15',
+          bg: 'rgba(250, 204, 21, 0.25)',
+          border: 'rgba(250, 204, 21, 0.5)',
+          arrow: '🟡',
+          badgeHtml: `<span class="badge" style="background: rgba(250, 204, 21, 0.2); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.4); padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Positivo</span>`
         };
       } else {
         return {
           label: 'Negativo',
           val: 'NEGATIVO',
-          color: '#EA580C',
-          bg: '#FFF7ED',
-          border: '#FDBA74',
-          arrow: '',
-          badgeHtml: `<span class="badge" style="background: #FFF7ED; color: #EA580C; border: 1px solid #FDBA74; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Negativo</span>`
+          color: '#f97316',
+          bg: 'rgba(249, 115, 22, 0.25)',
+          border: 'rgba(249, 115, 22, 0.5)',
+          arrow: '🟠',
+          badgeHtml: `<span class="badge" style="background: rgba(249, 115, 22, 0.2); color: #f97316; border: 1px solid rgba(249, 115, 22, 0.4); padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Negativo</span>`
         };
       }
     }
@@ -5873,21 +6432,21 @@ onForecastTermsCheckboxChange() {
       return {
         label: 'Positivo',
         val: 'POSITIVO',
-        color: '#059669',
-        bg: '#ECFDF5',
-        border: '#A7F3D0',
-        arrow: '',
-        badgeHtml: `<span class="badge badge-success" style="background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Positivo</span>`
+        color: '#4ade80',
+        bg: 'rgba(34, 197, 94, 0.25)',
+        border: 'rgba(34, 197, 94, 0.5)',
+        arrow: '🟢',
+        badgeHtml: `<span class="badge badge-success" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Positivo</span>`
       };
     } else {
       return {
         label: 'Negativo',
         val: 'NEGATIVO',
-        color: '#DC2626',
-        bg: '#FEF2F2',
-        border: '#FCA5A5',
-        arrow: '',
-        badgeHtml: `<span class="badge badge-danger" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Negativo</span>`
+        color: '#f87171',
+        bg: 'rgba(239, 68, 68, 0.25)',
+        border: 'rgba(239, 68, 68, 0.5)',
+        arrow: '🔴',
+        badgeHtml: `<span class="badge badge-danger" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: 700;">Negativo</span>`
       };
     }
   }
@@ -5979,7 +6538,7 @@ onForecastTermsCheckboxChange() {
 
     const statsEl = this.$('forecastChartStats');
     if (statsEl) {
-      statsEl.innerHTML = `Exibindo <strong>${filteredData.length}</strong> de ${this.forecastData.length} ativos (<span style="color: var(--green); font-weight: 700;">${dataPositivo.length} Positivo</span> / <span style="color: var(--red); font-weight: 700;">${dataNegativo.length} Negativo</span> / <span style="color: var(--text-muted); font-weight: 700;">${dataInconsistente.length} Inconsistente</span>)`;
+  statsEl.innerHTML = `Exibindo <strong>${filteredData.length}</strong> de ${this.forecastData.length} ativos (<span style="color: #4ade80;">🟢 ${dataPositivo.length} Positivo</span> / <span style="color: #f87171;">🔴 ${dataNegativo.length} Negativo</span> / <span style="color: #9ca3af;">⚪ ${dataInconsistente.length} Inconsistente</span>)`;
     }
 
     const appRef = this;
@@ -6020,7 +6579,7 @@ onForecastTermsCheckboxChange() {
             ctx.fill();
             ctx.stroke();
 
-            ctx.fillStyle = bias.color || '#0F172A';
+            ctx.fillStyle = '#ffffff';
             ctx.textAlign = 'left';
             ctx.textBaseline = 'middle';
             ctx.fillText(`${bias.arrow} ${ticker}`, boxX + paddingX, boxY + boxHeight / 2);
@@ -6079,32 +6638,32 @@ onForecastTermsCheckboxChange() {
             title: {
               display: true,
               text: 'Acurácia do Ensemble (%)',
-              color: '#475569',
-              font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 12 }
+              color: '#9ca3af',
+              font: { weight: 'bold', size: 12 }
             },
-            grid: { color: 'rgba(0, 0, 0, 0.05)' },
-            ticks: { color: '#475569' }
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#e5e7eb' }
           },
           y: {
             title: {
               display: true,
               text: 'Meta Chance de Acerto (%)',
-              color: '#475569',
-              font: { family: 'Plus Jakarta Sans', weight: 'bold', size: 12 }
+              color: '#9ca3af',
+              font: { weight: 'bold', size: 12 }
             },
-            grid: { color: 'rgba(0, 0, 0, 0.05)' },
-            ticks: { color: '#475569' }
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            ticks: { color: '#e5e7eb' }
           }
         },
         plugins: {
           legend: {
-            labels: { color: '#0F172A', font: { family: 'Plus Jakarta Sans', weight: 'bold' } }
+            labels: { color: '#f3f4f6', font: { weight: 'bold' } }
           },
           tooltip: {
-            backgroundColor: '#0F172A',
-            titleColor: '#818CF8',
-            bodyColor: '#F8FAFC',
-            borderColor: '#334155',
+            backgroundColor: 'rgba(17, 24, 39, 0.95)',
+            titleColor: '#6366f1',
+            bodyColor: '#f3f4f6',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
             borderWidth: 1,
             padding: 12,
             callbacks: {
@@ -6125,7 +6684,7 @@ onForecastTermsCheckboxChange() {
                   `Acurácia Ensemble: ${appRef.formatNumber(item.acuracia_ens_pct, 1)}%`,
                   `Prob. Subir: ${appRef.formatNumber(item.prob_subir_pct, 1)}%`,
                   `Data Previsão: ${item.data_previsao}`,
-                  `Clique para abrir Análise do Ativo`
+                  `💡 Clique para abrir Análise do Ativo`
                 ];
               }
             }
@@ -6145,60 +6704,6 @@ onForecastTermsCheckboxChange() {
     this.filterForecastData();
   }
 
-  renderForecastSparkline(data, canvasId) {
-    if (!data || data.length === 0) return;
-
-    const ctx = document.getElementById(canvasId);
-    if (!ctx) return;
-
-    const avg = data.reduce((a, b) => a + b, 0) / data.length;
-    const avgLine = data.map(() => avg);
-    const isUp = data[data.length - 1] >= data[0];
-
-    const existingChart = Chart.getChart(ctx);
-    if (existingChart) {
-      existingChart.destroy();
-    }
-
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: data.map((_, i) => i),
-        datasets: [
-          {
-            data: data,
-            borderColor: isUp ? '#00ccff' : '#ffcc00',
-            borderWidth: 1.8,
-            pointRadius: 0,
-            fill: false,
-            tension: 0.3
-          },
-          {
-            data: avgLine,
-            borderColor: 'rgba(100, 116, 139, 0.5)',
-            borderWidth: 1.0,
-            borderDash: [5, 2],
-            pointRadius: 0,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        events: [],
-        responsive: false,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false }, tooltip: { enabled: false } },
-        scales: {
-          x: { display: false },
-          y: { display: false }
-        }
-      }
-    });
-
-    if (!this.forecastSparkCharts) this.forecastSparkCharts = [];
-    this.forecastSparkCharts.push(chart);
-  }
-
   renderForecastTable(data) {
     const matchEl = this.$('forecastMatchCount');
     if (matchEl) {
@@ -6209,7 +6714,7 @@ onForecastTermsCheckboxChange() {
     if (!tbody) return;
 
     if (!data || data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="11" class="empty-state">Nenhum ativo atende aos critérios selecionados.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" class="empty-state">Nenhum ativo atende aos critérios selecionados.</td></tr>';
       return;
     }
 
@@ -6217,17 +6722,6 @@ onForecastTermsCheckboxChange() {
     const asc = this.forecastSortAsc !== undefined ? this.forecastSortAsc : false;
 
     const sorted = [...data].sort((a, b) => {
-      if (col === 'delta_pct') {
-        const detA = this.getForecastMarketDetails(a);
-        const detB = this.getForecastMarketDetails(b);
-        if (detA.hasNewer && !detB.hasNewer) return -1;
-        if (!detA.hasNewer && detB.hasNewer) return 1;
-        if (!detA.hasNewer && !detB.hasNewer) return 0;
-        let va = detA.delta_pct;
-        let vb = detB.delta_pct;
-        return asc ? (va - vb) : (vb - va);
-      }
-
       let va = a[col];
       let vb = b[col];
 
@@ -6241,29 +6735,10 @@ onForecastTermsCheckboxChange() {
       return 0;
     });
 
-    tbody.innerHTML = sorted.map((r, idx) => {
+    tbody.innerHTML = sorted.map(r => {
       const logoHtml = this.getAssetLogoHTML(r.tickerSA, 24);
       const bias = this.getStatisticalBias(r);
       const consistency = this.getModelConsistency(r);
-      const details = this.getForecastMarketDetails(r);
-
-      let lastCloseHtml = '';
-      let sparklineCanvasHtml = '';
-
-      if (details.hasNewer) {
-        const deltaColor = details.delta_pct > 0 ? 'var(--green)' : (details.delta_pct < 0 ? 'var(--red)' : 'var(--text-muted)');
-        const deltaRsSign = details.delta_rs > 0 ? '+' : (details.delta_rs < 0 ? '-' : '');
-        const deltaPctSign = details.delta_pct > 0 ? '+' : '';
-
-        lastCloseHtml = `
-          <div style="font-weight: 600;">R$ ${this.formatNumber(details.fechamento_ult_dia, 2)}</div>
-          <small style="color: ${deltaColor}; font-weight: 600;">
-            ${deltaRsSign}R$ ${this.formatNumber(Math.abs(details.delta_rs), 2)} (${deltaPctSign}${this.formatNumber(details.delta_pct, 2)}%)
-          </small>
-        `;
-
-        sparklineCanvasHtml = `<canvas id="forecast-spark-${idx}" width="80" height="30"></canvas>`;
-      }
 
       return `
         <tr>
@@ -6274,8 +6749,6 @@ onForecastTermsCheckboxChange() {
             </div>
           </td>
           <td style="font-weight: 600;">R$ ${this.formatNumber(r.preco, 2)}</td>
-          <td>${lastCloseHtml}</td>
-          <td style="padding: 2px 5px; text-align: center;">${sparklineCanvasHtml}</td>
           <td>${bias.badgeHtml}</td>
           <td>${consistency.badgeHtml}</td>
           <td style="font-weight: 700; color: var(--accent-light);">${this.formatNumber(r.meta_chance_acerto_pct, 1)}%</td>
@@ -6284,26 +6757,12 @@ onForecastTermsCheckboxChange() {
           <td style="font-size: 0.85rem; color: var(--text-muted);">${r.data_previsao}</td>
           <td style="text-align: center;">
             <button class="btn btn-outline btn-sm" onclick="app.showMonitor('${r.ticker}')" title="Análise do Ativo" style="padding: 0.25rem 0.6rem; font-size: 0.8rem; border-radius: 6px;">
-              Analisar
+              📊 Analisar
             </button>
           </td>
         </tr>
       `;
     }).join('');
-
-    if (this.forecastSparkCharts) {
-      this.forecastSparkCharts.forEach(c => c.destroy());
-    }
-    this.forecastSparkCharts = [];
-
-    setTimeout(() => {
-      sorted.forEach((r, idx) => {
-        const details = this.getForecastMarketDetails(r);
-        if (details.hasNewer && details.sparklineCloses && details.sparklineCloses.length > 0) {
-          this.renderForecastSparkline(details.sparklineCloses, `forecast-spark-${idx}`);
-        }
-      });
-    }, 50);
   }
 
 }
