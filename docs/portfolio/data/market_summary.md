@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-06
+## Resumo de Mercado - 2026-11-09
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AZEV4.SA | Azevedo & Travassos S.A. | R$ 0.79 | R$ 0.66 | **+19.70%** 🚀 | -9.59% ⬇️ |
-| ONCO3.SA | Oncoclínicas do Brasil Serviços Médicos S.A. | R$ 0.98 | R$ 0.87 | **+12.64%** 🚀 | +61.78% ⬆️ |
-| LUXM4.SA | Trevisa Investimentos S.A. | R$ 3.40 | R$ 3.02 | **+12.58%** 🚀 | +31.12% ⬆️ |
-| MDNE3.SA | Moura Dubeux Engenharia S.A. | R$ 18.05 | R$ 16.04 | **+12.53%** 🚀 | +49.48% ⬆️ |
-| TUPY3.SA | Tupy S.A. | R$ 17.19 | R$ 15.45 | **+11.26%** 🚀 | +385.49% ⬆️ |
+| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 9.50 | R$ 6.25 | **+52.00%** 🚀 | 0.00% — |
+| MBRF3.SA | MBRF Global Foods Company S.A. | R$ 17.61 | R$ 15.61 | **+12.81%** 🚀 | 0.00% — |
+| NATU3.SA | Natura Cosméticos S.A. | R$ 5.71 | R$ 5.17 | **+10.44%** 🚀 | 0.00% — |
+| BEEF3.SA | Minerva S.A. | R$ 2.82 | R$ 2.61 | **+8.05%** 🚀 | 0.00% — |
+| HAPV3.SA | Hapvida Participações e Investimentos S.A. | R$ 4.77 | R$ 4.45 | **+7.19%** 🚀 | 0.00% — |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| JFEN3.SA | João Fortes Engenharia S.A. | R$ 3.13 | R$ 3.91 | **-19.95%** 📉 | +3.74% ⬆️ |
-| FESA3.SA | Cia de Ferro Ligas da Bahia S.A. - FERBASA | R$ 9.03 | R$ 9.80 | **-7.86%** 📉 | -45.94% ⬇️ |
-| VVEO3.SA | CM Hospitalar S/A | R$ 0.63 | R$ 0.68 | **-7.35%** 📉 | +30.11% ⬆️ |
-| RCSL4.SA | Recrusul S/A | R$ 0.66 | R$ 0.70 | **-5.71%** 📉 | -6.12% ⬇️ |
-| LJQQ3.SA | Lojas Quero-Quero S.A. | R$ 1.05 | R$ 1.10 | **-4.55%** 📉 | +17.23% ⬆️ |
+| HBOR3.SA | Helbor Empreendimentos S.A. | R$ 1.17 | R$ 1.45 | **-19.31%** 📉 | 0.00% — |
+| HBRE3.SA | HBR Realty Empreendimentos Imobiliários S.A. | R$ 1.52 | R$ 1.82 | **-16.48%** 📉 | 0.00% — |
+| ATED3.SA | Atom Educação E Editora S.A. | R$ 0.80 | R$ 0.85 | **-5.88%** 📉 | 0.00% — |
+| LUXM4.SA | Trevisa Investimentos S.A. | R$ 3.20 | R$ 3.40 | **-5.88%** 📉 | 0.00% — |
+| JFEN3.SA | João Fortes Engenharia S.A. | R$ 2.95 | R$ 3.13 | **-5.75%** 📉 | 0.00% — |
