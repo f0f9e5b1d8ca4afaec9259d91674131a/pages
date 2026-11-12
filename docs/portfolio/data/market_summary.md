@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-10
+## Resumo de Mercado - 2026-11-11
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| MAPT3.SA | Cemepe Investimentos S.A. | R$ 2.51 | R$ 1.90 | **+32.11%** 🚀 | -94.23% ⬇️ |
-| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 12.30 | R$ 9.50 | **+29.47%** 🚀 | -93.68% ⬇️ |
-| TECN3.SA | Technos S.A. | R$ 9.00 | R$ 7.95 | **+13.21%** 🚀 | +291.53% ⬆️ |
-| MGLU3.SA | Magazine Luiza S.A. | R$ 6.52 | R$ 5.84 | **+11.64%** 🚀 | +49.59% ⬆️ |
-| HBOR3.SA | Helbor Empreendimentos S.A. | R$ 1.30 | R$ 1.17 | **+11.11%** 🚀 | +22.00% ⬆️ |
+| ARML3.SA | Armac Locação, Logística e Serviços S.A. | R$ 3.91 | R$ 3.18 | **+22.96%** 🚀 | 0.00% — |
+| MGLU3.SA | Magazine Luiza S.A. | R$ 7.66 | R$ 6.52 | **+17.48%** 🚀 | 0.00% — |
+| AMER3.SA | Americanas S.A. | R$ 5.07 | R$ 4.40 | **+15.23%** 🚀 | 0.00% — |
+| CSAN3.SA | Cosan S.A. | R$ 3.03 | R$ 2.68 | **+13.06%** 🚀 | 0.00% — |
+| LUPA3.SA | Lupatech S.A. | R$ 4.30 | R$ 3.84 | **+11.98%** 🚀 | 0.00% — |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| TXRX3.SA | Têxtil Renauxview S.A. | R$ 5.46 | R$ 9.00 | **-39.33%** 📉 | 0.00% — |
-| USIM6.SA | Usinas Siderúrgicas de Minas Gerais S.A. | R$ 5.51 | R$ 6.60 | **-16.52%** 📉 | 0.00% — |
-| SBFG3.SA | Grupo SBF S.A. | R$ 4.84 | R$ 5.48 | **-11.68%** 📉 | +142.11% ⬆️ |
-| SMTO3.SA | São Martinho S.A. | R$ 17.85 | R$ 20.20 | **-11.63%** 📉 | +198.55% ⬆️ |
-| SOND6.SA | Sondotécnica Engenharia de Solos S.A. | R$ 80.00 | R$ 90.10 | **-11.21%** 📉 | 0.00% — |
+| RAIZ4.SA | Raizen SA | R$ 0.30 | R$ 21.40 | **-98.60%** 📉 | 0.00% — |
+| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 9.42 | R$ 12.30 | **-23.41%** 📉 | 0.00% — |
+| CSED3.SA | Cruzeiro do Sul Educacional S.A. | R$ 3.81 | R$ 4.94 | **-22.87%** 📉 | 0.00% — |
+| ONCO3.SA | Oncoclínicas do Brasil Serviços Médicos S.A. | R$ 0.88 | R$ 0.98 | **-10.20%** 📉 | 0.00% — |
+| RVEE3.SA | Revee S.A. | R$ 0.61 | R$ 0.67 | **-8.96%** 📉 | 0.00% — |
