@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-11
+## Resumo de Mercado - 2026-11-12
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| ARML3.SA | Armac Locação, Logística e Serviços S.A. | R$ 3.91 | R$ 3.18 | **+22.96%** 🚀 | 0.00% — |
-| MGLU3.SA | Magazine Luiza S.A. | R$ 7.66 | R$ 6.52 | **+17.48%** 🚀 | 0.00% — |
-| AMER3.SA | Americanas S.A. | R$ 5.07 | R$ 4.40 | **+15.23%** 🚀 | 0.00% — |
-| CSAN3.SA | Cosan S.A. | R$ 3.03 | R$ 2.68 | **+13.06%** 🚀 | 0.00% — |
-| LUPA3.SA | Lupatech S.A. | R$ 4.30 | R$ 3.84 | **+11.98%** 🚀 | 0.00% — |
+| OSXB3.SA | OSX Brasil S.A. | R$ 2.23 | R$ 1.47 | **+51.70%** 🚀 | +87.37% ⬆️ |
+| HAPV3.SA | Hapvida Participações e Investimentos S.A. | R$ 5.32 | R$ 4.63 | **+14.90%** 🚀 | +124.13% ⬆️ |
+| AZZA3.SA | Azzas 2154 S.A. | R$ 16.90 | R$ 15.37 | **+9.95%** 🚀 | +42.08% ⬆️ |
+| NUTR3.SA | Nutriplant Indústria e Comércio S/A | R$ 2.92 | R$ 2.66 | **+9.77%** 🚀 | -58.31% ⬇️ |
+| FHER3.SA | Fertilizantes Heringer S.A. | R$ 2.90 | R$ 2.68 | **+8.21%** 🚀 | +80.13% ⬆️ |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| RAIZ4.SA | Raizen SA | R$ 0.30 | R$ 21.40 | **-98.60%** 📉 | 0.00% — |
-| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 9.42 | R$ 12.30 | **-23.41%** 📉 | 0.00% — |
-| CSED3.SA | Cruzeiro do Sul Educacional S.A. | R$ 3.81 | R$ 4.94 | **-22.87%** 📉 | 0.00% — |
-| ONCO3.SA | Oncoclínicas do Brasil Serviços Médicos S.A. | R$ 0.88 | R$ 0.98 | **-10.20%** 📉 | 0.00% — |
-| RVEE3.SA | Revee S.A. | R$ 0.61 | R$ 0.67 | **-8.96%** 📉 | 0.00% — |
+| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 0.70 | R$ 0.94 | **-25.53%** 📉 | +3910.49% ⬆️ |
+| CASN3.SA | Companhia Catarinense de Águas e Saneamento - CASAN | R$ 4.56 | R$ 6.00 | **-24.00%** 📉 | -45.45% ⬇️ |
+| AMER3.SA | Americanas S.A. | R$ 4.05 | R$ 5.07 | **-20.12%** 📉 | +154.03% ⬆️ |
+| MELK3.SA | Melnick Desenvolvimento Imobiliário S.A. | R$ 2.06 | R$ 2.29 | **-10.04%** 📉 | +235.12% ⬆️ |
+| CEED3.SA | Companhia Estadual de Distribuição de Energia Elétrica | R$ 9.00 | R$ 10.00 | **-10.00%** 📉 | 0.00% — |
