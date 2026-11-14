@@ -1,23 +1,23 @@
 {
-  "last_update": "2026-11-13T01:17:30.411866",
-  "market_last_date": "2026-11-12",
+  "last_update": "2026-11-14T00:59:51.737987",
+  "market_last_date": "2026-11-13",
   "market_summary": "O mercado brasileiro segue atento ao cenário fiscal e movimentações de commodities.",
   "ibov": {
     "ticker": "^BVSP",
     "name": "IBOVESPA",
-    "last_close": 171324.31,
-    "date": "2026-11-12",
-    "daily_delta": -0.004275775892130684,
-    "monthly_delta": -0.17189827346196973,
-    "yearly_delta": 0.08685560764560729,
+    "last_close": 172457.77,
+    "date": "2026-11-13",
+    "daily_delta": 0.006617695127360879,
+    "monthly_delta": -0.16487767909891238,
+    "yearly_delta": 0.0973248622440539,
     "delta_volume": 0,
     "is_liquid": true,
     "is_ibov": false,
-    "prev_close": 172060.0
+    "prev_close": 171324.0
   },
   "assets": {
     "^BVSP": {
-      "summary": "Movimentações recentes: [Google News] Título: Ibovespa avança e dribla mau humor com plano de ajuste fiscal - UOL Economia\n\n[Yahoo Finance] Título: 3 Brazilian Value Stocks Offering Defensive Exposure To Domestic Utilities\nConteúdo da Matéria: \"The significant ramp up in capital expenditures that the earlier narrative highlighted now ties into Companhia de Saneamento de Minas Gerais delivering record CapEx of R$2; 9b in 2025 and a Board approved plan of about R$3.",
+      "summary": "Movimentações recentes: [Google News] Título: Ibovespa avança e dribla mau humor com plano de ajuste fiscal - UOL Economia\n\n[Google News] Título: Análise Técnica do Ibovespa (IBOV) - Gráfico Diário - Relatório - Genial Analisa\n\n[Yahoo Finance] Título: 3 Brazilian Value Stocks Offering Defensive Exposure To Domestic Utilities\nConteúdo da Matéria: \"The significant ramp up in capital expenditures that the earlier narrative highlighted now ties into Companhia de Saneamento de Minas Gerais delivering record CapEx of R$2; 9b in 2025 and a Board approved plan of about R$3.",
       "sentiment": {
         "score": 0.65,
         "label": "positivo"
@@ -29,23 +29,23 @@
         "current_status": "Mencionado nas análises de mercado (1 menções otimistas / 0 cautelosas)",
         "trend_summary": "O mercado monitora o desempenho de IBOVESPA nas principais carteiras e notícias financeiras nos últimos 15 dias."
       },
-      "period": "De 08/11/2026 a 11/11/2026",
+      "period": "De 10/11/2026 a 11/11/2026",
       "sources": [
         "https://economia.uol.com.br/cotacoes/noticias/redacao/2026/11/11/ibovespa-avanca-e-dribla-mau-humor-com-plano-de-ajuste-fiscal.ghtm",
+        "https://analisa.genialinvestimentos.com.br/analises-tecnicas/analises-diarias/ibovespa",
         "https://finance.yahoo.com/markets/stocks/articles/3-brazilian-value-stocks-offering-031241848.html",
-        "https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-10112026/",
-        "https://borainvestir.b3.com.br/noticias/mercado/mercados-hoje-ibovespa-b3-recua-056-mas-termina-semana-no-positivo-dolar-sobe-a-r-512/"
+        "https://www.infomoney.com.br/mercados/ibovespa-hoje-bolsa-de-valores-ao-vivo-10112026/"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": true,
-      "last_close": 171324.31,
-      "daily_delta": -0.004275775892130684,
-      "monthly_delta": -0.17189827346196973,
-      "yearly_delta": 0.08685560764560729,
-      "price_date": "2026-11-12"
+      "last_close": 172457.77,
+      "daily_delta": 0.006617695127360879,
+      "monthly_delta": -0.16487767909891238,
+      "yearly_delta": 0.0973248622440539,
+      "price_date": "2026-11-13"
     },
-    "OSXB3.SA": {
-      "summary": "Movimentações recentes: [Google News] Título: Imobiliário sobe 9,6% e Petróleo e Gás cai 12,1% na semana na B3 - Visno Invest\n\n[Google News] Título: Osx Brasil (OSXB3) - trademap; br\nConteúdo da Matéria: Simulação no período do gráfico Considera só a variação do preço de fechamento no período, sem proventos, taxas ou Imposto de Renda.",
+    "ALLD3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: ALLD3 sobe 16,8% e CSNA3 cai 10,2% na abertura da bolsa hoje - Visno Invest\n\n[Google News] Título: Allied (ALLD3) registra lucro líquido de R$ 33,8 mi no 3T26 - Visno Invest\n\n[Google News] Título: Santander, Copasa, JHSF, Allied e Klabin pagam dividendos nesta semana - BPMoney\nConteúdo da Matéria: Os investidores de cinco empresas negociadas na bolsa brasileira recebem proventos ao longo desta semana, entre os dias 9 e 13 de novembro; A lista reúne pagamentos de dividendos e juros sobre capital próprio (JCP) de Santander (SANB3), Copasa (CSMG3), JHSF (JHSF3), Allied (ALLD3) e Klabin (KLBN3).",
       "sentiment": {
         "score": 0.0,
         "label": "neutro"
@@ -55,80 +55,131 @@
         "exclusions_count": 0,
         "previous_status": "Sob acompanhamento do mercado",
         "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 0 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de OSXB3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+        "trend_summary": "O mercado monitora o desempenho de ALLD3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
       },
-      "period": "De 06/11/2026 a 08/11/2026",
+      "period": "De 09/11/2026 a 13/11/2026",
       "sources": [
-        "https://visnoinvest.com.br/news/16308/imobiliario-sobe-96-e-petroleo-e-gas-cai-121-na-semana-na-b3",
-        "https://trademap.com.br/ativos/OSXB3?range=1m",
-        "https://www.ativovirtual.com.br/avnews/artigos/fato-relevante-osx-brasil-osxb3-justica-homologa-recuperacao-judicial-com-cram-down"
+        "https://visnoinvest.com.br/news/16532/alld3-sobe-168-e-csna3-cai-102-na-abertura-da-bolsa-hoje",
+        "https://visnoinvest.com.br/news/16497/allied-alld3-registra-lucro-liquido-de-r-338-mi-no-3t26",
+        "https://bpmoney.com.br/mercado/acoes/santander-copasa-allied-klabin-dividendos-jcp-semana/",
+        "https://www.moneytimes.com.br/santander-sanb3-copasa-csmg3-e-mais-tres-empresas-pagam-dividendos-mlem/"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": true,
-      "last_close": 2.23,
-      "daily_delta": 0.5170068027210883,
-      "monthly_delta": 0.2670454545454546,
-      "yearly_delta": 0.06190476190476191,
-      "price_date": "2026-11-12"
-    },
-    "HAPV3.SA": {
-      "summary": "Movimentações recentes: [Google News] Título: Hapvida (HAPV3): por que ação saltou 15% mesmo com queda de quase 70% do lucro? - InfoMoney\nConteúdo da Matéria: Analistas destacaram alguns sinais de estabilização, especialmente em preços, geração de caixa e redução da dívida, mas avaliam que os principais desafios da companhia seguem praticamente intactos\n\nPublicidade\n\nA Hapvida (HAPV3) apresentou um resultado do terceiro trimeste de 2026 (3T26) ligeiramente melhor do que o mercado temia, mas ainda insuficiente para dissipar as dúvidas sobre a velocidade de sua recuperação operacional; Analistas destacaram alguns sinais de estabilização, especialmente em preços, geração de caixa e redução da dívida, mas avaliam que os principais desafios da companhia seguem praticamente intactos.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 0,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 0 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de HAPV3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 10/11/2026 a 12/11/2026",
-      "sources": [
-        "https://www.infomoney.com.br/mercados/hapvida-hapv3-analise-3t26-sinais-iniciais-de-melhora-mas-pressao-sobre-margens-e-caixa-persiste-acoes/",
-        "https://investalk.bb.com.br/noticias/mercado/HAPV3-3T26",
-        "https://visnoinvest.com.br/news/16444/hapvida-hapv3-registra-prejuizo-de-r-1188-mi-no-3t26",
-        "https://www.suno.com.br/noticias/hapvida-hapv3-queda-acoes-bolsa/"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": false,
-      "last_close": 5.32,
-      "daily_delta": 0.1490280777537798,
-      "monthly_delta": -0.3906071019473081,
-      "yearly_delta": -0.8372591006423983,
-      "price_date": "2026-11-12"
+      "last_close": 7.13,
+      "daily_delta": 0.1983193277310924,
+      "monthly_delta": 0.12283464566929148,
+      "yearly_delta": 0.10030864197530853,
+      "price_date": "2026-11-13"
     },
-    "AZZA3.SA": {
-      "summary": "Movimentações recentes: [Yahoo Finance] Título: Azzas 2154 SA (BSP:AZZA3) (Q3 2026) Earnings Call Highlights: Margin Expansion and Strong Cash; Conteúdo da Matéria: Q : What is the potential of the global sourcing strategy, particularly from China, for improving costs and commercial conditions? A : Alexandre (CEO) explained that global sourcing is a key pillar of the transformation, with the company importing almost 10% of the winter collection from China, Cambodia, and Vietnam.",
+    "JALL3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: Jalles Machado lucra R$ 41,4 milhões no 2T da safra 2026/27, alta de 118,8% - ADVFN\n\n[Google News (Recomendações)] Título: Jalles (JALL3) dispara após balanço e vai na contramão de Raízen (RAIZ4) e São Martinho (SMTO3); o que agradou o mercado? - Money Times\nConteúdo da Matéria: Um fator que chamou atenção foi a estratégia comercial adotada pela Jalles, que reduziu vendas e acumulou estoques; (Foto: Divulgação)\n\nAs ações da Jalles (JALL3) figuram entre as maiores altas da bolsa nesta sexta-feira (13), avançando 8,26% às 14h54, em uma reação positiva dos investidores aos resultados do segundo trimestre da safra 2026/27 (2T27).",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 2,
+        "exclusions_count": 1,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (2 menções otimistas / 1 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de JALL3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 12/11/2026 a 13/11/2026",
+      "sources": [
+        "https://br.advfn.com/noticias/PAPERBR/2026/artigo/99705492",
+        "https://www.moneytimes.com.br/jalles-jall3-dispara-apos-balanco-e-vai-na-contramao-de-raizen-raiz4-e-sao-martinho-smto3-o-que-agradou-o-mercado-pads/",
+        "https://bpmoney.com.br/negocios/empresas-na-bolsa/jalles-jall3-lucro-414-milhoes-2t27-alta-119/",
+        "https://visnoinvest.com.br/news/16500/jalles-machado-jall3-aprova-recompra-de-ate-4-mi-de-acoes"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": false,
+      "last_close": 2.49,
+      "daily_delta": 0.14220183486238525,
+      "monthly_delta": -0.1727574750830564,
+      "yearly_delta": -0.11387900355871883,
+      "price_date": "2026-11-13"
+    },
+    "PDTC3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: Padtec (PDTC3): Apresenta resultados financeiros positivos no 3T26 - Acionista.",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 0,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de PDTC3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "Em 06/11/2026",
+      "sources": [
+        "https://acionista.com.br/padtec-pdtc3-apresenta-resultados-financeiros-positivos-no-3t26/"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 1.8,
+      "daily_delta": 0.13207547169811318,
+      "monthly_delta": -0.07216494845360821,
+      "yearly_delta": 0.4876033057851241,
+      "price_date": "2026-11-13"
+    },
+    "UCAS3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: Unicasa (UCAS3) teve prejuízo de R$ 1,3 milhão no terceiro trimestre de 2026 - TradeMap\nConteúdo da Matéria: A Unicasa (UCAS3) registrou prejuízo consolidado de R$ 1,3 milhão no terceiro trimestre de 2026, ante prejuízo de R$ 947 mil no mesmo período de 2025; O prejuízo líquido atribuído aos acionistas controladores foi o mesmo, de R$ 1,3 milhão, contra prejuízo de R$ 947 mil um ano antes.",
       "sentiment": {
         "score": -0.55,
         "label": "negativo"
       },
       "recommendation_trend_15d": {
         "inclusions_count": 0,
-        "exclusions_count": 3,
+        "exclusions_count": 1,
         "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 3 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de AZZA3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 1 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de UCAS3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
       },
-      "period": "Em 12/11/2026",
+      "period": "Em 13/11/2026",
       "sources": [
-        "https://finance.yahoo.com/markets/stocks/articles/azzas-2154-sa-bsp-azza3-230851878.html",
-        "https://www.nordinvestimentos.com.br/blog/azzas-2154-azza3-resultados-4t25/",
-        "https://www.moneytimes.com.br/o-que-explica-a-disparada-de-azzas-2154-azza3-apos-o-balanco-do-3t25-citi-e-btg-respondem-bdap/",
-        "https://trademap.com.br/noticias/news-8594092"
+        "https://trademap.com.br/noticias/news-8600026"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": false,
-      "last_close": 16.9,
-      "daily_delta": 0.09954456733897188,
-      "monthly_delta": -0.3320158102766799,
-      "yearly_delta": -0.37081161578555477,
-      "price_date": "2026-11-12"
+      "last_close": 0.79,
+      "daily_delta": 0.12857142857142878,
+      "monthly_delta": -0.373015873015873,
+      "yearly_delta": -0.39230769230769225,
+      "price_date": "2026-11-13"
     },
-    "NUTR3.SA": {
-      "summary": "Sem notícias recentes de impacto encontradas nos principais canais financeiros para NUTR3.",
+    "EVEN3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: Lucro da Even (EVEN3) despencou 77,6% no terceiro trimestre de 2026 - TradeMap\nConteúdo da Matéria: A Even (EVEN3) registrou lucro líquido atribuído aos acionistas controladores de R$ 20,2 milhões no terceiro trimestre de 2026, queda de 77,6% em relação aos R$ 90 milhões do mesmo período de 2025; O lucro consolidado somou R$ 27,8 milhões, recuo de 72,0% na comparação anual.",
+      "sentiment": {
+        "score": -0.55,
+        "label": "exclusao_carteira"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 0,
+        "exclusions_count": 9,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 9 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de EVEN3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 12/11/2026 a 13/11/2026",
+      "sources": [
+        "https://trademap.com.br/noticias/news-8599968",
+        "https://www.ativovirtual.com.br/avnews/artigos/even-even3-lucro-cai-776-e-divida-liquida-salta-1479",
+        "https://www.moneytimes.com.br/even-even3-tem-queda-de-78-no-lucro-no-3o-trimestre-fets/",
+        "https://visnoinvest.com.br/news/16490/even-even3-registra-lucro-liquido-de-r-20-mi-no-3t26"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": false,
+      "last_close": 3.63,
+      "daily_delta": 0.12383900928792557,
+      "monthly_delta": -0.38265306122448983,
+      "yearly_delta": -0.5422446406052963,
+      "price_date": "2026-11-13"
+    },
+    "MAPT4.SA": {
+      "summary": "Sem notícias recentes de impacto encontradas nos principais canais financeiros para MAPT4.",
       "sentiment": {
         "score": 0.0,
         "label": "neutro"
@@ -138,17 +189,71 @@
         "exclusions_count": 0,
         "previous_status": "Sem menções recentes em recomendações",
         "current_status": "Sem menções recentes em recomendações",
-        "trend_summary": "Não foram identificadas alterações relevantes nas carteiras recomendadas para NUTR3 nos últimos 15 dias."
+        "trend_summary": "Não foram identificadas alterações relevantes nas carteiras recomendadas para MAPT4 nos últimos 15 dias."
       },
       "period": "",
       "sources": [],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": false,
-      "last_close": 2.92,
-      "daily_delta": 0.09774436090225547,
-      "monthly_delta": 0.2116182572614107,
-      "yearly_delta": 0.0034364261168384758,
-      "price_date": "2026-11-12"
+      "last_close": 2.01,
+      "daily_delta": -0.19600000000000006,
+      "monthly_delta": 0.004999999999999893,
+      "yearly_delta": -0.48461538461538467,
+      "price_date": "2026-11-13"
+    },
+    "AALR3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: MNPR3, WHRL3 e AALR3 atingem nova mínima de 52 semanas - Visno Invest\n\n[Google News] Título: Imobiliário sobe 9,6% e Petróleo e Gás cai 12,1% na semana na B3 - Visno Invest.",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 0,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de AALR3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "Em 08/11/2026",
+      "sources": [
+        "https://visnoinvest.com.br/news/16309/mnpr3-whrl3-e-aalr3-atingem-nova-minima-de-52-semanas",
+        "https://visnoinvest.com.br/news/16308/imobiliario-sobe-96-e-petroleo-e-gas-cai-121-na-semana-na-b3"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 1.31,
+      "daily_delta": -0.1863354037267081,
+      "monthly_delta": -0.5589225589225589,
+      "yearly_delta": -0.7446393762183235,
+      "price_date": "2026-11-13"
+    },
+    "AGXY3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: Histórico de preços de AGXY3 - trademap; br\nConteúdo da Matéria: Apresentação de 04/02/2026 (i) as renúncias apresentadas pelos executivos: Eron Martins (Presidente), Luiz Conrado Sundfeld CFO e DRI) e membro Comitê Financeiro; e Marina Godoy (Diretora sem designação específica); (ii) renúncia de Sebastian Marcos Popik (Presidente CA) e membro Comitê de Pessoas; (iii) eleição Luiz Gabriel Piovezani Silva (Diretor Presidente e CFO e DRI interino); e Marcos de Carvalho Ramos (Diretor sem designação específica); (iv) eleição Ruy Flaks Schneider (Presidente CA).",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 0,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de AGXY3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 03/11/2026 a 10/11/2026",
+      "sources": [
+        "https://trademap.com.br/ativos/AGXY3?docTypes=PRESENTATION&_portalCacheRecovered=1",
+        "https://br.advfn.com/bolsa-de-valores/bovespa/agrogalaxy-participacoes-on-AGXY3/comparacao-de-pares",
+        "https://visnoinvest.com.br/news/16309/mnpr3-whrl3-e-aalr3-atingem-nova-minima-de-52-semanas",
+        "https://www.moneytimes.com.br/agrogalaxy-agxy3-deve-realizar-grupamento-de-acoes-para-se-adequar-as-regras-da-b3-pads/"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 0.2,
+      "daily_delta": -0.13043478260869568,
+      "monthly_delta": -0.6774193548387096,
+      "yearly_delta": -0.9640287769784173,
+      "price_date": "2026-11-13"
     },
     "FHER3.SA": {
       "summary": "Movimentações recentes: [Google News] Título: Heringer (FHER3) tem prejuízo de R$ 27,4 milhões no 3T26, com queda de 69% nas entregas - Money Times\nConteúdo da Matéria: Entre julho e setembro, as entregas de fertilizantes pela Heringer totalizaram 179 mil toneladas, queda de 69,2%; (Imagem: Reprodução)\n\nA Fertilizantes Heringer (FHER3) registrou prejuízo líquido de R$ 27,4 milhões no terceiro trimestre de 2026, ampliando em 109,1% as perdas de R$ 13,1 milhões apuradas no mesmo período do ano passado.",
@@ -169,334 +274,41 @@
         "https://br.advfn.com/bolsa-de-valores/bovespa/fer-heringer-on-FHER3/concorrentes",
         "https://trademap.com.br/ativos/FHER3?range=1d&docTypes=MATERIAL_FACT"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 2.9,
-      "daily_delta": 0.08208955223880587,
-      "monthly_delta": -0.046052631578947456,
-      "yearly_delta": -0.34684684684684697,
-      "price_date": "2026-11-12"
-    },
-    "UCAS3.SA": {
-      "summary": "Sem notícias recentes de impacto encontradas nos principais canais financeiros para UCAS3.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 0,
-        "previous_status": "Sem menções recentes em recomendações",
-        "current_status": "Sem menções recentes em recomendações",
-        "trend_summary": "Não foram identificadas alterações relevantes nas carteiras recomendadas para UCAS3 nos últimos 15 dias."
-      },
-      "period": "",
-      "sources": [],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 0.7,
-      "daily_delta": -0.25531914893617025,
-      "monthly_delta": -0.44000000000000006,
-      "yearly_delta": -0.45736434108527135,
-      "price_date": "2026-11-12"
-    },
-    "CASN3.SA": {
-      "summary": "Sem notícias recentes de impacto encontradas nos principais canais financeiros para CASN3.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 0,
-        "previous_status": "Sem menções recentes em recomendações",
-        "current_status": "Sem menções recentes em recomendações",
-        "trend_summary": "Não foram identificadas alterações relevantes nas carteiras recomendadas para CASN3 nos últimos 15 dias."
-      },
-      "period": "",
-      "sources": [],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 4.56,
-      "daily_delta": -0.2400000000000001,
-      "monthly_delta": -0.5636363636363637,
-      "yearly_delta": -0.5636363636363637,
-      "price_date": "2026-11-12"
-    },
-    "AMER3.SA": {
-      "summary": "Movimentações recentes: [Google News] Título: Americanas (AMER3) reverte lucro e registra prejuízo de R$ 352 milhões no 3º tri - Investidor10\nConteúdo da Matéria: Americanas (AMER3) reportou seus resultados financeiros referentes ao 3T26 (terceiro trimestre de 2026), registrando um prejuízo líquido de R$ 352 milhões no período; O montante reverte o lucro líquido de R$ 367 milhões apurado no mesmo intervalo de 2025.",
-      "sentiment": {
-        "score": -0.55,
-        "label": "negativo"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 4,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 4 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de AMER3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "Em 12/11/2026",
-      "sources": [
-        "https://investidor10.com.br/amp/noticias/americanas-amer3-reverte-lucro-e-registra-prejuizo-de-r-352-milhoes-no-3-tri-123846/",
-        "https://www.moneytimes.com.br/americanas-amer3-tem-prejuizo-de-r-352-milhoes-no-3o-trimestre-lmrs/",
-        "https://acionista.com.br/americanas-amer3-recebe-propostas-milionarias-veja-quem-pode-se-beneficiar/",
-        "https://trademap.com.br/noticias/news-8590989"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 4.05,
-      "daily_delta": -0.20118343195266275,
-      "monthly_delta": -0.3671875000000001,
-      "yearly_delta": -0.2702702702702703,
-      "price_date": "2026-11-12"
-    },
-    "MELK3.SA": {
-      "summary": "Movimentações recentes: [Google News] Título: Melnick (MELK3): Divulga resultados do 3T26 - Acionista; br\n\n[Google News] Título: Melnick: lucro líquido cai 76% no 3T26, enquanto ações recuam mais de 10% na B3 - ADVFN\n\n[Google News] Título: Ser, Melnick, Vitru, Unifique, Desktop e mais empresas divulgam resultados no 3T - InfoMoney\nConteúdo da Matéria: Os balanços trouxeram desempenhos variados, com destaque para o crescimento do lucro de Ser Educacional, Desktop e Vitru\n\nPublicidade\n\nMelnick (MELK3), Ser Educacional (SEER3), Unifique (FIQE3), Valid (VLID3), Log-In (LOGN3), Espaço Laser (ESPA3), Vittia (VITT3), Livetech (LVTC3), Desktop (DESK3), Helbor (HBOR3), Vitru (VTRU3), LPS Brasil (LPSB3), CSU Digital (CSUD3) e Plano&Plano (PLPL3) divulgaram seus resultados do terceiro trimestre de 2026 (3T26).",
-      "sentiment": {
-        "score": -0.55,
-        "label": "negativo"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 2,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 2 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de MELK3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "Em 12/11/2026",
-      "sources": [
-        "https://acionista.com.br/melnick-melk3-divulga-resultados-do-3t26/",
-        "https://br.advfn.com/noticias/PAPERBR/2026/artigo/99694895",
-        "https://www.infomoney.com.br/mercados/ser-melnick-vitru-unifique-desktop-e-mais-empresas-divulgam-resultados-no-3t/",
-        "https://trademap.com.br/noticias/news-8590998"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 2.06,
-      "daily_delta": -0.10043668122270744,
-      "monthly_delta": -0.41142857142857137,
-      "yearly_delta": -0.3905325443786982,
-      "price_date": "2026-11-12"
-    },
-    "CEED3.SA": {
-      "summary": "Sem notícias recentes de impacto encontradas nos principais canais financeiros para CEED3.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 0,
-        "exclusions_count": 0,
-        "previous_status": "Sem menções recentes em recomendações",
-        "current_status": "Sem menções recentes em recomendações",
-        "trend_summary": "Não foram identificadas alterações relevantes nas carteiras recomendadas para CEED3 nos últimos 15 dias."
-      },
-      "period": "",
-      "sources": [],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 9.0,
-      "daily_delta": -0.09999999999999998,
-      "monthly_delta": -0.09999999999999998,
-      "yearly_delta": 0.005586592178770999,
-      "price_date": "2026-11-12"
-    },
-    "BBDC4.SA": {
-      "summary": "Movimentações recentes: [Google News (Recomendações)] Título: Top 5 Recomendações da Semana: oportunidades em ações - Safra\nConteúdo da Matéria: O Safra apresenta semanalmente as cinco principais recomendações para investidores com perfil agressivo; Para a escolha dos nomes, o Safra utiliza uma profunda análise técnica dos ativos e elabora recomendações com exposição a operações na ponta comprada e na ponta vendida, selecionando sempre papéis de empresas que negociam um volume financeiro elevado, garantindo a liquidez das posições.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 11,
-        "exclusions_count": 2,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (11 menções otimistas / 2 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de BBDC4 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 04/11/2026 a 09/11/2026",
-      "sources": [
-        "https://oespecialista.safra.com.br/top-recomendacoes-acoes-safra/",
-        "https://finance.yahoo.com/economy/policy/articles/brazilian-banks-cut-growth-forecasts-183353312.html",
-        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/acoes-do-bradesco-caem-apos-rebaixamento-do-jp-morgan-mas-ensaiam-recuperacao/",
-        "https://www.seudinheiro.com/2026/empresas/nem-na-crise-de-2016-o-bradesco-bbdc4-ficou-tao-barato-o-que-o-morgan-stanley-esta-vendo-apos-o-tombo-de-quase-40-desde-as-eleicoes-miql/"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": true,
-      "last_close": 14.32,
-      "daily_delta": -0.0006978367062107083,
-      "monthly_delta": -0.31939163498098855,
-      "yearly_delta": -0.19910514541387014,
-      "price_date": "2026-11-12"
+      "last_close": 2.55,
+      "daily_delta": -0.12068965517241381,
+      "monthly_delta": -0.1442953020134229,
+      "yearly_delta": -0.4358407079646017,
+      "price_date": "2026-11-13"
     },
-    "ABEV3.SA": {
-      "summary": "Movimentações recentes: [Google News (Recomendações)] Título: Ambev (ABEV3): Como reage a ação após anúncio do imposto do pecado? - Investidor10\nConteúdo da Matéria: As ações da Ambev (ABEV3) registravam pouca oscilação na abertura de mercado nesta quarta-feira (4), após o governo federal anunciar a regulamentação do Imposto Seletivo, conhecido como “imposto do pecado”; Porém, o movimento não durou muito.",
-      "sentiment": {
-        "score": 0.65,
-        "label": "positivo"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 3,
-        "exclusions_count": 0,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (3 menções otimistas / 0 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de ABEV3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 29/10/2026 a 05/11/2026",
-      "sources": [
-        "https://investidor10.com.br/noticias/ambev-abev3-como-reage-a-acao-apos-anuncio-do-imposto-do-pecado-123703/",
-        "https://www.marketbeat.com/instant-alerts/transcript-ambev-q3-earnings-call-highlights-2026-10-30/?utm_source=yahoofinance&utm_medium=yahoofinance",
-        "https://www.fool.com/earnings/call-transcripts/2026/10/29/ambev-abev-q3-2026-earnings-call-transcript/",
-        "https://finance.yahoo.com/markets/stocks/articles/ambev-q3-earnings-snapshot-071229291.html"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": true,
-      "last_close": 15.75,
-      "daily_delta": -0.006309148264984188,
-      "monthly_delta": -0.03492647058823528,
-      "yearly_delta": 0.2295081967213115,
-      "price_date": "2026-11-12"
-    },
-    "PETR4.SA": {
-      "summary": "Movimentações recentes: [Google News (Recomendações)] Título: Petrobras (PETR4) pode pagar 20% em dividendos em 2027, diz banco - Investidor10\nConteúdo da Matéria: Em relatório divulgado nesta quinta-feira (12), o Goldman Sachs projetou que as petroleiras brasileiras devem apresentar dividend yield de até 20% no próximo ano; O destaque vai para Petrobras (PETR4) e Prio (PRIO3), que podem entregar um bom retorno aos acionistas.",
-      "sentiment": {
-        "score": 0.65,
-        "label": "inclusao_carteira"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 3,
-        "exclusions_count": 0,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (3 menções otimistas / 0 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de PETR4 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 11/11/2026 a 12/11/2026",
-      "sources": [
-        "https://investidor10.com.br/amp/noticias/petrobras-petr4-pode-pagar-20-em-dividendos-em-2027-diz-banco-123866/",
-        "https://finance.yahoo.com/energy/articles/petrobras-lifts-2026-cash-flow-152500177.html",
-        "https://www.marketbeat.com/instant-alerts/transcript-petroleo-brasileiro-sa-petrobras-q3-earnings-call-highlights-2026-11-11/?utm_source=yahoofinance&utm_medium=yahoofinance",
-        "https://www.infomoney.com.br/onde-investir/dividendos-da-petrobras-encolheram-ainda-vale-ter-petr4-na-carteira-de-renda/"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 44.7,
-      "daily_delta": 0.02640642939150406,
-      "monthly_delta": -0.2137203166226913,
-      "yearly_delta": 0.5157680569684642,
-      "price_date": "2026-11-12"
-    },
-    "ITUB4.SA": {
-      "summary": "Movimentações recentes: [Yahoo Finance] Título: Deutsche Bank Launched Crypto Custody With Bitcoin and Ethereum but Not XRP or Solana; Why Were They Left Out?\nConteúdo da Matéria: It sounds nuts, but SoFi is giving new Active Invest users up to $1,000 in stock for a limited time, and all it takes is a $50 deposit to get started.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 3,
-        "exclusions_count": 2,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (3 menções otimistas / 2 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de ITUB4 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 07/11/2026 a 12/11/2026",
-      "sources": [
-        "https://247wallst.com/investing/cryptocurrency/2026/11/12/deutsche-bank-launched-crypto-custody-with-bitcoin-and-ethereum-but-not-xrp-or-solana-why-were-they-left-out/",
-        "https://www.marketbeat.com/instant-alerts/transcript-what-grupo-aval-acciones-y-valores-aval-said-on-its-q3-earnings-call-2026-11-11/?utm_source=yahoofinance&utm_medium=yahoofinance",
-        "https://br.advfn.com/jornal/2026/11/terra-investimentos-carteira-semanal-top5-itau-itub4-axia-energia-axia3",
-        "https://www.marketbeat.com/instant-alerts/transcript-what-itau-unibanco-itub-said-on-its-q3-earnings-call-2026-11-07/?utm_source=yahoofinance&utm_medium=yahoofinance"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 41.68,
-      "daily_delta": -0.0009587727708533222,
-      "monthly_delta": -0.16103059581320456,
-      "yearly_delta": 0.15169936446532195,
-      "price_date": "2026-11-12"
-    },
-    "VALE3.SA": {
-      "summary": "Movimentações recentes: [Yahoo Finance] Título: Here’s Why Itaú BBA Downgraded Vale (VALE)\nConteúdo da Matéria: We just published a list of the 10 Stocks Analysts Are Downgrading Right Now and Vale (NYSE:VALE) ranked 8th on this list; Stocks slid again on Tuesday after a hotter-than-expected inflation report fed bets on higher interest rates, and all three major indexes finished lower.",
+    "CSNA3.SA": {
+      "summary": "Movimentações recentes: [Google News (Recomendações)] Título: CSN vê dívida disparar para R$ 44,9 bi e alavancagem atingir 4,23 vezes - EuQueroInvestir\nConteúdo da Matéria: Endividamento aumentou R$ 2,8 bilhões no terceiro trimestre, enquanto Ebitda caiu 43% em um ano\n\nA CSN (CSNA3) enfrenta uma deterioração de sua situação financeira, com a dívida líquida atingindo R$ 44,9 bilhões no terceiro trimestre de 2026 e a alavancagem avançando para 4,23 vezes; O endividamento aumentou R$ 2,8 bilhões em apenas três meses, superando as 3,91 vezes indicadas na prévia da companhia e acendendo um sinal de alerta para os investidores.",
       "sentiment": {
         "score": -0.55,
         "label": "negativo"
       },
       "recommendation_trend_15d": {
-        "inclusions_count": 2,
-        "exclusions_count": 3,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (2 menções otimistas / 3 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de VALE3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 10/11/2026 a 12/11/2026",
-      "sources": [
-        "https://finance.yahoo.com/markets/stocks/articles/why-ita-bba-downgraded-vale-205852941.html",
-        "https://investidor10.com.br/amp/noticias/hora-de-comprar-vale-vale3-itau-bba-diz-que-nao-safra-diz-que-sim-123804/",
-        "https://finance.yahoo.com/markets/stocks/articles/vale-stocks-fall-3-84-194305073.html",
-        "https://247wallst.com/investing/2026/11/10/buy-sell-or-hold-tuesdays-top-upgrades-and-downgrades-cloudflare-deckers-outdoors-draftkings-mongodb-nike-oneok-philip-morris-international-riot-platforms-wix-com-and-more/"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": false,
-      "last_close": 63.95,
-      "daily_delta": -0.007449945677479475,
-      "monthly_delta": -0.0477963073257891,
-      "yearly_delta": 0.05215531424810793,
-      "price_date": "2026-11-12"
-    },
-    "TAEE11.SA": {
-      "summary": "Movimentações recentes: [Google News] Título: Taesa (TAEE11) 3T26: crescimento operacional com ganho de margem compensa maior despesa financeira; positivo; - InvesTalk\nConteúdo da Matéria: A Taesa divulgou ontem (11/11), após o fechamento do mercado, seu resultado referente ao 3T26, com forte crescimento de receita e EBITDA regulatórios, apoiado por energizações de novos ativos e reforços e pela aquisição de cinco ativos.",
-      "sentiment": {
-        "score": 0.0,
-        "label": "neutro"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 1,
+        "inclusions_count": 0,
         "exclusions_count": 1,
         "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (1 menções otimistas / 1 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de TAEE11 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+        "current_status": "Mencionado nas análises de mercado (0 menções otimistas / 1 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de CSNA3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
       },
-      "period": "De 11/11/2026 a 12/11/2026",
+      "period": "De 12/11/2026 a 13/11/2026",
       "sources": [
-        "https://investalk.bb.com.br/noticias/mercado/taee11-3t26-bb-analisa",
-        "https://www.moneytimes.com.br/taesa-taee11-tem-lucro-125-maior-no-3o-trimestre-com-impulso-de-novos-projetos-fets/",
-        "https://analisa.genialinvestimentos.com.br/analises-e-resultados/TAESA-TAEE11--Resultado-3T26",
-        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/taesa-colhe-resultados-de-compra-bilionaria-e-ve-lucro-e-receita-avancarem-no-3t26/"
+        "https://euqueroinvestir.com/acoes/csn-ve-divida-disparar-para-r-449-bi-e-alavancagem-atingir-423-vezes",
+        "https://www.marketbeat.com/instant-alerts/transcript-national-steel-q3-earnings-call-highlights-2026-11-13/?utm_source=yahoofinance&utm_medium=yahoofinance",
+        "https://visnoinvest.com.br/news/16520/csn-csna3-registra-prejuizo-de-r-12-bi-no-3t26",
+        "https://www.nordinvestimentos.com.br/blog/csn-csna3-resultados-4t25/"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": false,
-      "last_close": 41.57,
-      "daily_delta": 0.007025193798449569,
-      "monthly_delta": -0.0933478735005453,
-      "yearly_delta": -0.0045498084291186736,
-      "price_date": "2026-11-12"
-    },
-    "WEGE3.SA": {
-      "summary": "Movimentações recentes: [Yahoo Finance] Título: CTS vs; WEGZY: Which Stock Is the Better Value Option?\nConteúdo da Matéria: Investors looking for stocks in the Electronics - Miscellaneous Components sector might want to consider either CTS (CTS) or Weg SA (WEGZY).",
-      "sentiment": {
-        "score": 0.65,
-        "label": "inclusao_carteira"
-      },
-      "recommendation_trend_15d": {
-        "inclusions_count": 3,
-        "exclusions_count": 0,
-        "previous_status": "Sob acompanhamento do mercado",
-        "current_status": "Mencionado nas análises de mercado (3 menções otimistas / 0 cautelosas)",
-        "trend_summary": "O mercado monitora o desempenho de WEGE3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
-      },
-      "period": "De 04/11/2026 a 09/11/2026",
-      "sources": [
-        "https://finance.yahoo.com/markets/stocks/articles/cts-vs-wegzy-stock-better-154002512.html",
-        "https://br.advfn.com/noticias/BOV/2026/artigo/99680909",
-        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/de-olho-em-ia-e-data-centers-itau-bba-aposta-na-weg-para-novembro/",
-        "https://www.moneytimes.com.br/weg-wege3-compra-terreno-na-india-por-us-8-milhoes-para-ampliar-operacoes-no-pais-lmrs/"
-      ],
-      "updated_at": "2026-11-13T01:17:30.411866",
-      "is_outdated": true,
-      "last_close": 51.65,
-      "daily_delta": 0.000775043596202174,
-      "monthly_delta": 0.01653217870497925,
-      "yearly_delta": 0.19976771196283405,
-      "price_date": "2026-11-12"
+      "last_close": 3.72,
+      "daily_delta": -0.12056737588652489,
+      "monthly_delta": -0.40096618357487923,
+      "yearly_delta": -0.5679442508710801,
+      "price_date": "2026-11-13"
     },
     "BBAS3.SA": {
       "summary": "Movimentações recentes: [Google News] Título: BBAS3 - Banco Do Brasil - Resultados, Dividendos, Cotação e Indicadores - Investidor10\nConteúdo da Matéria: O Banco do Brasil é uma das maiores e mais antigas instituições financeiras da América Latina, atuando no setor financeiro e no subsetor de intermediários financeiros; Sendo controlado pelo governo federal, seus principais produtos e serviços incluem contas correntes, poupança, crédito, câmbio, seguros, investimentos, previdência, incentivo ao Agro e gestão de ativos.",
@@ -511,20 +323,20 @@
         "current_status": "Mencionado nas análises de mercado (1 menções otimistas / 0 cautelosas)",
         "trend_summary": "O mercado monitora o desempenho de BBAS3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
       },
-      "period": "De 12/11/2026 a 13/11/2026",
+      "period": "De 12/11/2026 a 14/11/2026",
       "sources": [
         "https://investidor10.com.br/acoes/bbas3/",
+        "https://www.nordinvestimentos.com.br/blog/banco-do-brasil-bbas3-resultados-4t25/",
         "https://www.infomoney.com.br/mercados/bbas3-acoes-do-banco-do-brasil-desabam-10-com-resultado-abaixo-em-todas-as-frentes/",
-        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/do-agro-aos-dividendos-o-que-o-investidor-precisa-saber-sobre-o-plano-de-recuperacao-do-bb/",
-        "https://www.infomoney.com.br/mercados/banco-do-brasil-bbas3-traz-decepcao-generalizada-alertas-e-coloca-recuperacao-em-xeque-como-mercado-leu-o-3t/"
+        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/do-agro-aos-dividendos-o-que-o-investidor-precisa-saber-sobre-o-plano-de-recuperacao-do-bb/"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": false,
-      "last_close": 15.48,
-      "daily_delta": -0.08348134991119005,
-      "monthly_delta": -0.3616494845360825,
-      "yearly_delta": -0.30175913396481735,
-      "price_date": "2026-11-12"
+      "last_close": 15.1,
+      "daily_delta": -0.02454780361757114,
+      "monthly_delta": -0.37577511368334027,
+      "yearly_delta": -0.309872029250457,
+      "price_date": "2026-11-13"
     },
     "MGLU3.SA": {
       "summary": "Movimentações recentes: [Google News] Título: Magalu (MGLU3): ação cai mais de 7% nesta 5ª e evidencia visões diversas após 3T - InfoMoney\nConteúdo da Matéria: Publicidade\n\nAs ações do Magazine Luiza (MGLU3) chegaram a abrir em alta na sessão desta quinta-feira (12), encaminhando-se para a quinta alta seguida e seguindo o ânimo recente depois da divulgação dos resultados do terceiro trimestre de 2026 (2T26) e de dados de outubro que mostraram “ponto de virada”; Porém, os papéis logo viraram para baixa e fecharam com forte queda de 7,70%, a R$ 7,07, segunda maior baixa do Ibovespa.",
@@ -546,25 +358,221 @@
         "https://www.suno.com.br/noticias/magalu-mglu3-banco-alta/amp/",
         "https://investalk.bb.com.br/noticias/mercado/magazine-luiza-mglu3-resultado-3t26"
       ],
-      "updated_at": "2026-11-13T01:17:30.411866",
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 7.81,
+      "daily_delta": 0.1046676096181045,
+      "monthly_delta": -0.280184331797235,
+      "yearly_delta": -0.08654970760233927,
+      "price_date": "2026-11-13"
+    },
+    "BBDC4.SA": {
+      "summary": "Movimentações recentes: [Yahoo Finance] Título: Nu Holdings Soars 11% on Record $1; 1 Billion Profit as It Takes “First Steps Beyond Latin America”\nConteúdo da Matéria: Key Takeaways\n\nNu Holdings shares jumped 11% today on record third-quarter net income of $1.",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 11,
+        "exclusions_count": 2,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (11 menções otimistas / 2 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de BBDC4 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 06/11/2026 a 13/11/2026",
+      "sources": [
+        "https://www.tikr.com/blog/nu-holdings-soars-11-on-record-1-1-billion-profit-as-it-takes-first-steps-beyond-latin-america?ref=yahoofinance&tlnk=yf-261113-6mm8v6h5",
+        "https://oespecialista.safra.com.br/top-recomendacoes-acoes-safra/",
+        "https://www.ativovirtual.com.br/avnews/artigos/bbdc4-apos-queda-de-37-desconto-ao-patrimonio-compensa-a-rentabilidade-menor",
+        "https://finance.yahoo.com/economy/policy/articles/brazilian-banks-cut-growth-forecasts-183353312.html"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
       "is_outdated": false,
-      "last_close": 7.07,
-      "daily_delta": -0.07702349869451697,
-      "monthly_delta": -0.3776408450704225,
-      "yearly_delta": -0.18076477404403246,
-      "price_date": "2026-11-12"
+      "last_close": 14.52,
+      "daily_delta": 0.013966480446927276,
+      "monthly_delta": -0.30426449448969817,
+      "yearly_delta": -0.1897321428571429,
+      "price_date": "2026-11-13"
+    },
+    "VALE3.SA": {
+      "summary": "Movimentações recentes: [Yahoo Finance] Título: Here’s Why Itaú BBA Downgraded Vale (VALE)\nConteúdo da Matéria: We just published a list of the 10 Stocks Analysts Are Downgrading Right Now and Vale (NYSE:VALE) ranked 8th on this list; Stocks slid again on Tuesday after a hotter-than-expected inflation report fed bets on higher interest rates, and all three major indexes finished lower.",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 3,
+        "exclusions_count": 1,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (3 menções otimistas / 1 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de VALE3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 10/11/2026 a 12/11/2026",
+      "sources": [
+        "https://finance.yahoo.com/markets/stocks/articles/why-ita-bba-downgraded-vale-205852941.html",
+        "https://oespecialista.safra.com.br/vale-vale3-recomendacao-compra-safra-preco-alvo-2027/",
+        "https://finance.yahoo.com/markets/stocks/articles/vale-stocks-fall-3-84-194305073.html",
+        "https://247wallst.com/investing/2026/11/10/buy-sell-or-hold-tuesdays-top-upgrades-and-downgrades-cloudflare-deckers-outdoors-draftkings-mongodb-nike-oneok-philip-morris-international-riot-platforms-wix-com-and-more/"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 63.5,
+      "daily_delta": -0.0070367474589523304,
+      "monthly_delta": -0.0482613908872902,
+      "yearly_delta": 0.046128500823723106,
+      "price_date": "2026-11-13"
+    },
+    "TAEE11.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: Taesa (TAEE11) 3T26: crescimento operacional com ganho de margem compensa maior despesa financeira; positivo; - InvesTalk\nConteúdo da Matéria: A Taesa divulgou ontem (11/11), após o fechamento do mercado, seu resultado referente ao 3T26, com forte crescimento de receita e EBITDA regulatórios, apoiado por energizações de novos ativos e reforços e pela aquisição de cinco ativos.",
+      "sentiment": {
+        "score": 0.0,
+        "label": "neutro"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 1,
+        "exclusions_count": 1,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (1 menções otimistas / 1 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de TAEE11 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 11/11/2026 a 12/11/2026",
+      "sources": [
+        "https://investalk.bb.com.br/noticias/mercado/taee11-3t26-bb-analisa",
+        "https://www.moneytimes.com.br/taesa-taee11-tem-lucro-125-maior-no-3o-trimestre-com-impulso-de-novos-projetos-fets/",
+        "https://analisa.genialinvestimentos.com.br/analises-e-resultados/TAESA-TAEE11--Resultado-3T26",
+        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/taesa-colhe-resultados-de-compra-bilionaria-e-ve-lucro-e-receita-avancarem-no-3t26/"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 42.09,
+      "daily_delta": 0.012509020928554326,
+      "monthly_delta": -0.07879185817465517,
+      "yearly_delta": 0.006456241032998689,
+      "price_date": "2026-11-13"
+    },
+    "PETR4.SA": {
+      "summary": "Movimentações recentes: [Yahoo Finance] Título: How Earnings And Guidance Will Impact BP Stock Investors\nConteúdo da Matéria: The most relevant update for that thesis is BP's decision to affirm the third quarter 2026 interim dividend of 8; 660 cents per share, paid fully in cash without a scrip option.",
+      "sentiment": {
+        "score": 0.65,
+        "label": "positivo"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 2,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (2 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de PETR4 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "Em 13/11/2026",
+      "sources": [
+        "https://finance.yahoo.com/markets/stocks/articles/earnings-guidance-impact-bp-stock-210955198.html",
+        "https://www.marketbeat.com/instant-alerts/transcript-computer-modelling-group-q2-earnings-call-highlights-2026-11-13/?utm_source=yahoofinance&utm_medium=yahoofinance",
+        "https://www.fool.com/earnings/call-transcripts/2026/11/13/petrobras-pbr-q3-2026-earnings-call-transcript/",
+        "https://finance.yahoo.com/markets/stocks/articles/petroleo-brasileiro-pbr-stock-outpacing-134002813.html"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": false,
+      "last_close": 45.3,
+      "daily_delta": 0.01342281879194629,
+      "monthly_delta": -0.22044398554465672,
+      "yearly_delta": 0.5298885511651468,
+      "price_date": "2026-11-13"
+    },
+    "WEGE3.SA": {
+      "summary": "Movimentações recentes: [Yahoo Finance] Título: CTS vs; WEGZY: Which Stock Is the Better Value Option?\nConteúdo da Matéria: Investors looking for stocks in the Electronics - Miscellaneous Components sector might want to consider either CTS (CTS) or Weg SA (WEGZY).",
+      "sentiment": {
+        "score": 0.65,
+        "label": "inclusao_carteira"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 5,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (5 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de WEGE3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 04/11/2026 a 09/11/2026",
+      "sources": [
+        "https://finance.yahoo.com/markets/stocks/articles/cts-vs-wegzy-stock-better-154002512.html",
+        "https://investidor10.com.br/noticias/a-acao-na-b3-que-pode-subir-mais-de-20-segundo-a-xp-123713/",
+        "https://www.estadao.com.br/einvestidor/cenarios-e-mercado/de-olho-em-ia-e-data-centers-itau-bba-aposta-na-weg-para-novembro/",
+        "https://www.moneytimes.com.br/weg-wege3-compra-terreno-na-india-por-us-8-milhoes-para-ampliar-operacoes-no-pais-lmrs/"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 51.31,
+      "daily_delta": -0.006582768635043479,
+      "monthly_delta": 0.01724821570182411,
+      "yearly_delta": 0.19381107491856686,
+      "price_date": "2026-11-13"
+    },
+    "ITUB4.SA": {
+      "summary": "Movimentações recentes: [Yahoo Finance] Título: Nu Holdings Soars 11% on Record $1; 1 Billion Profit as It Takes “First Steps Beyond Latin America”\nConteúdo da Matéria: Key Takeaways\n\nNu Holdings shares jumped 11% today on record third-quarter net income of $1.",
+      "sentiment": {
+        "score": 0.65,
+        "label": "positivo"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 2,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (2 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de ITUB4 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 11/11/2026 a 13/11/2026",
+      "sources": [
+        "https://www.tikr.com/blog/nu-holdings-soars-11-on-record-1-1-billion-profit-as-it-takes-first-steps-beyond-latin-america?ref=yahoofinance&tlnk=yf-261113-6mm8v6h5",
+        "https://www.fool.com/earnings/takeaways/2026/11/13/grupo-aval-3-key-takeaways-for-long-term-investors/",
+        "https://247wallst.com/investing/cryptocurrency/2026/11/12/deutsche-bank-launched-crypto-custody-with-bitcoin-and-ethereum-but-not-xrp-or-solana-why-were-they-left-out/",
+        "https://www.marketbeat.com/instant-alerts/transcript-what-grupo-aval-acciones-y-valores-aval-said-on-its-q3-earnings-call-2026-11-11/?utm_source=yahoofinance&utm_medium=yahoofinance"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": false,
+      "last_close": 42.27,
+      "daily_delta": 0.01415547024952013,
+      "monthly_delta": -0.13699469171090228,
+      "yearly_delta": 0.1635012386457475,
+      "price_date": "2026-11-13"
+    },
+    "ABEV3.SA": {
+      "summary": "Movimentações recentes: [Google News] Título: As recompras recentes de ações podem sustentar as ações da ABEV3? - Traders Union\n\n[Google News] Título: ABEV3: vale a pena comprar depois do resultado trimestral? - Acionista; br\n\n[Google News] Título: Dividendos: MOVI3 paga 4,59% e PETR4 entra em data-com; vale a pena? - ativovirtual.",
+      "sentiment": {
+        "score": 0.65,
+        "label": "positivo"
+      },
+      "recommendation_trend_15d": {
+        "inclusions_count": 3,
+        "exclusions_count": 0,
+        "previous_status": "Sob acompanhamento do mercado",
+        "current_status": "Mencionado nas análises de mercado (3 menções otimistas / 0 cautelosas)",
+        "trend_summary": "O mercado monitora o desempenho de ABEV3 nas principais carteiras e notícias financeiras nos últimos 15 dias."
+      },
+      "period": "De 06/11/2026 a 12/11/2026",
+      "sources": [
+        "https://tradersunion.com/pt/news/stocks/show/4216496-ambev-rises-0-19percent-to-rusd15-82/",
+        "https://acionista.com.br/abev3-vale-a-pena-comprar-depois-do-resultado-trimestral/",
+        "https://www.ativovirtual.com.br/avnews/artigos/dividendos-movi3-paga-4-59-e-petr4-entra-em-data-com-vale-a-pena",
+        "https://oespecialista.safra.com.br/impacto-imposto-pecado-seletivo-ambev-2027/"
+      ],
+      "updated_at": "2026-11-14T00:59:51.737987",
+      "is_outdated": true,
+      "last_close": 15.79,
+      "daily_delta": 0.0025396825396823974,
+      "monthly_delta": -0.04418886198547223,
+      "yearly_delta": 0.2316692667706708,
+      "price_date": "2026-11-13"
     }
   },
   "market_movers": [
-    "OSXB3.SA",
-    "HAPV3.SA",
-    "AZZA3.SA",
-    "NUTR3.SA",
-    "FHER3.SA",
+    "ALLD3.SA",
+    "JALL3.SA",
+    "PDTC3.SA",
     "UCAS3.SA",
-    "CASN3.SA",
-    "AMER3.SA",
-    "MELK3.SA",
-    "CEED3.SA"
+    "EVEN3.SA",
+    "MAPT4.SA",
+    "AALR3.SA",
+    "AGXY3.SA",
+    "FHER3.SA",
+    "CSNA3.SA"
   ]
 }

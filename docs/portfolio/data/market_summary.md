@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-12
+## Resumo de Mercado - 2026-11-13
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| OSXB3.SA | OSX Brasil S.A. | R$ 2.23 | R$ 1.47 | **+51.70%** 🚀 | +87.37% ⬆️ |
-| HAPV3.SA | Hapvida Participações e Investimentos S.A. | R$ 5.32 | R$ 4.63 | **+14.90%** 🚀 | +124.13% ⬆️ |
-| AZZA3.SA | Azzas 2154 S.A. | R$ 16.90 | R$ 15.37 | **+9.95%** 🚀 | +42.08% ⬆️ |
-| NUTR3.SA | Nutriplant Indústria e Comércio S/A | R$ 2.92 | R$ 2.66 | **+9.77%** 🚀 | -58.31% ⬇️ |
-| FHER3.SA | Fertilizantes Heringer S.A. | R$ 2.90 | R$ 2.68 | **+8.21%** 🚀 | +80.13% ⬆️ |
+| ALLD3.SA | Allied Tecnologia S.A. | R$ 7.13 | R$ 5.95 | **+19.83%** 🚀 | +60.14% ⬆️ |
+| JALL3.SA | Jalles Machado S/A | R$ 2.49 | R$ 2.18 | **+14.22%** 🚀 | +6.74% ⬆️ |
+| PDTC3.SA | Padtec Holding S.A. | R$ 1.80 | R$ 1.59 | **+13.21%** 🚀 | -51.92% ⬇️ |
+| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 0.79 | R$ 0.70 | **+12.86%** 🚀 | +101.92% ⬆️ |
+| EVEN3.SA | Even Construtora e Incorporadora S.A. | R$ 3.63 | R$ 3.23 | **+12.38%** 🚀 | +39.41% ⬆️ |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 0.70 | R$ 0.94 | **-25.53%** 📉 | +3910.49% ⬆️ |
-| CASN3.SA | Companhia Catarinense de Águas e Saneamento - CASAN | R$ 4.56 | R$ 6.00 | **-24.00%** 📉 | -45.45% ⬇️ |
-| AMER3.SA | Americanas S.A. | R$ 4.05 | R$ 5.07 | **-20.12%** 📉 | +154.03% ⬆️ |
-| MELK3.SA | Melnick Desenvolvimento Imobiliário S.A. | R$ 2.06 | R$ 2.29 | **-10.04%** 📉 | +235.12% ⬆️ |
-| CEED3.SA | Companhia Estadual de Distribuição de Energia Elétrica | R$ 9.00 | R$ 10.00 | **-10.00%** 📉 | 0.00% — |
+| MAPT4.SA | Cemepe Investimentos S.A. | R$ 2.01 | R$ 2.50 | **-19.60%** 📉 | -85.71% ⬇️ |
+| AALR3.SA | Alliança Saúde e Participações S.A. | R$ 1.31 | R$ 1.61 | **-18.63%** 📉 | +13.63% ⬆️ |
+| AGXY3.SA | AgroGalaxy Participações S.A. | R$ 0.20 | R$ 0.23 | **-13.04%** 📉 | -28.45% ⬇️ |
+| FHER3.SA | Fertilizantes Heringer S.A. | R$ 2.55 | R$ 2.90 | **-12.07%** 📉 | +143.23% ⬆️ |
+| CSNA3.SA | Companhia Siderúrgica Nacional | R$ 3.72 | R$ 4.23 | **-12.06%** 📉 | +130.06% ⬆️ |
