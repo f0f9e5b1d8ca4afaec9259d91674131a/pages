@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-13
+## Resumo de Mercado - 2026-11-17
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| JALL3.SA | Jalles Machado S/A | R$ 2.49 | R$ 2.18 | **+14.22%** 🚀 | +4.14% ⬆️ |
-| PDTC3.SA | Padtec Holding S.A. | R$ 1.80 | R$ 1.59 | **+13.21%** 🚀 | -49.69% ⬇️ |
-| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 0.79 | R$ 0.70 | **+12.86%** 🚀 | +101.87% ⬆️ |
-| EVEN3.SA | Even Construtora e Incorporadora S.A. | R$ 3.63 | R$ 3.23 | **+12.38%** 🚀 | +35.12% ⬆️ |
-| GMAT3.SA | Grupo Mateus S.A. | R$ 4.25 | R$ 3.84 | **+10.68%** 🚀 | +57.66% ⬆️ |
+| AZEV3.SA | Azevedo & Travassos S.A. | R$ 11.47 | R$ 8.75 | **+31.09%** 🚀 | 0.00% — |
+| VIVR3.SA | Viver Incorporadora e Construtora S.A. | R$ 3.10 | R$ 2.41 | **+28.63%** 🚀 | 0.00% — |
+| LJQQ3.SA | Lojas Quero-Quero S.A. | R$ 1.14 | R$ 0.97 | **+17.53%** 🚀 | 0.00% — |
+| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 0.91 | R$ 0.80 | **+13.75%** 🚀 | 0.00% — |
+| HAPV3.SA | Hapvida Participações e Investimentos S.A. | R$ 6.12 | R$ 5.44 | **+12.50%** 🚀 | 0.00% — |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| FHER3.SA | Fertilizantes Heringer S.A. | R$ 2.55 | R$ 2.90 | **-12.07%** 📉 | +141.66% ⬆️ |
-| CSNA3.SA | Companhia Siderúrgica Nacional | R$ 3.72 | R$ 4.23 | **-12.06%** 📉 | +139.99% ⬆️ |
-| ENMT4.SA | Energisa Mato Grosso - Distribuidora de Energia S/A | R$ 27.00 | R$ 29.39 | **-8.13%** 📉 | +242.86% ⬆️ |
-| BALM4.SA | Baumer S.A. | R$ 14.70 | R$ 15.95 | **-7.84%** 📉 | -90.27% ⬇️ |
-| ONCO3.SA | Oncoclínicas do Brasil Serviços Médicos S.A. | R$ 0.81 | R$ 0.87 | **-6.90%** 📉 | -57.92% ⬇️ |
+| OSXB3.SA | OSX Brasil S.A. | R$ 1.31 | R$ 2.20 | **-40.45%** 📉 | 0.00% — |
+| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 6.70 | R$ 8.26 | **-18.89%** 📉 | 0.00% — |
+| INEP3.SA | Inepar S.A. Indústria e Construções | R$ 1.12 | R$ 1.34 | **-16.42%** 📉 | 0.00% — |
+| AALR3.SA | Alliança Saúde e Participações S.A. | R$ 0.83 | R$ 0.95 | **-12.63%** 📉 | 0.00% — |
+| PMAM3.SA | Paranapanema S.A. | R$ 0.22 | R$ 0.25 | **-12.00%** 📉 | 0.00% — |
