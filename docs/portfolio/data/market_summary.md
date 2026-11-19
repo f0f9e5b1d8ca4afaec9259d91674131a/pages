@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-17
+## Resumo de Mercado - 2026-11-18
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| AZEV3.SA | Azevedo & Travassos S.A. | R$ 11.47 | R$ 8.75 | **+31.09%** 🚀 | 0.00% — |
-| VIVR3.SA | Viver Incorporadora e Construtora S.A. | R$ 3.10 | R$ 2.41 | **+28.63%** 🚀 | 0.00% — |
-| LJQQ3.SA | Lojas Quero-Quero S.A. | R$ 1.14 | R$ 0.97 | **+17.53%** 🚀 | 0.00% — |
-| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 0.91 | R$ 0.80 | **+13.75%** 🚀 | 0.00% — |
-| HAPV3.SA | Hapvida Participações e Investimentos S.A. | R$ 6.12 | R$ 5.44 | **+12.50%** 🚀 | 0.00% — |
+| VIVR3.SA | Viver Incorporadora e Construtora S.A. | R$ 3.40 | R$ 3.10 | **+9.68%** 🚀 | 0.00% — |
+| BDLL4.SA | Bardella S.A. Indústrias Mecânicas | R$ 3.11 | R$ 2.90 | **+7.24%** 🚀 | 0.00% — |
+| VSTE3.SA | Veste S.A. Estilo | R$ 2.78 | R$ 2.60 | **+6.92%** 🚀 | 0.00% — |
+| CMIN3.SA | CSN Mineração S.A. | R$ 5.07 | R$ 4.75 | **+6.74%** 🚀 | 0.00% — |
+| RCSL4.SA | Recrusul S/A | R$ 0.65 | R$ 0.61 | **+6.56%** 🚀 | 0.00% — |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| OSXB3.SA | OSX Brasil S.A. | R$ 1.31 | R$ 2.20 | **-40.45%** 📉 | 0.00% — |
-| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 6.70 | R$ 8.26 | **-18.89%** 📉 | 0.00% — |
-| INEP3.SA | Inepar S.A. Indústria e Construções | R$ 1.12 | R$ 1.34 | **-16.42%** 📉 | 0.00% — |
-| AALR3.SA | Alliança Saúde e Participações S.A. | R$ 0.83 | R$ 0.95 | **-12.63%** 📉 | 0.00% — |
-| PMAM3.SA | Paranapanema S.A. | R$ 0.22 | R$ 0.25 | **-12.00%** 📉 | 0.00% — |
+| ESTR4.SA | Manufatura de Brinquedos Estrela S.A. | R$ 1.27 | R$ 2.33 | **-45.49%** 📉 | 0.00% — |
+| AALR3.SA | Alliança Saúde e Participações S.A. | R$ 0.74 | R$ 0.83 | **-10.84%** 📉 | 0.00% — |
+| AVLL3.SA | Alphaville S.A. | R$ 4.69 | R$ 5.23 | **-10.33%** 📉 | 0.00% — |
+| COCE3.SA | Companhia Energética do Ceará - COELCE | R$ 28.80 | R$ 32.00 | **-10.00%** 📉 | 0.00% — |
+| AZEV4.SA | Azevedo & Travassos S.A. | R$ 0.68 | R$ 0.75 | **-9.33%** 📉 | 0.00% — |
