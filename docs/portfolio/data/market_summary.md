@@ -1,21 +1,21 @@
-## Resumo de Mercado - 2026-11-23
+## Resumo de Mercado - 2026-11-25
 
 ### 📈 Maiores Altas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| BRKM3.SA | Braskem S.A. | R$ 3.80 | R$ 3.10 | **+22.58%** 🚀 | +89.21% ⬆️ |
-| FIQE3.SA | Unifique Telecomunicações S.A. | R$ 6.85 | R$ 5.73 | **+19.55%** 🚀 | +147.69% ⬆️ |
-| TXRX3.SA | Têxtil Renauxview S.A. | R$ 6.50 | R$ 5.46 | **+19.05%** 🚀 | 0.00% — |
-| AZEV3.SA | Azevedo & Travassos S.A. | R$ 11.95 | R$ 10.51 | **+13.70%** 🚀 | +106.94% ⬆️ |
-| BRKM5.SA | Braskem S.A. | R$ 2.91 | R$ 2.60 | **+11.92%** 🚀 | +131.79% ⬆️ |
+| CEGR3.SA | Companhia Distribuidora de Gás do Rio de Janeiro - CEG | R$ 97.00 | R$ 57.00 | **+70.18%** 🚀 | 0.00% — |
+| UCAS3.SA | Unicasa Indústria de Móveis S.A. | R$ 1.15 | R$ 0.94 | **+22.34%** 🚀 | 0.00% — |
+| NATU3.SA | Natura Cosméticos S.A. | R$ 4.71 | R$ 4.26 | **+10.56%** 🚀 | 0.00% — |
+| PTBL3.SA | PBG S.A. | R$ 1.40 | R$ 1.28 | **+9.38%** 🚀 | 0.00% — |
+| HBOR3.SA | Helbor Empreendimentos S.A. | R$ 0.98 | R$ 0.90 | **+8.89%** 🚀 | 0.00% — |
 
 ### 📉 Maiores Baixas (Dia - Geral)
 
 | Ativo | Nome | Fechamento | Anterior | Variação | DeltaVolume |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| SEQL3.SA | Sequoia Logística e Transportes S.A. | R$ 6.20 | R$ 7.37 | **-15.88%** 📉 | -97.45% ⬇️ |
-| NUTR3.SA | Nutriplant Indústria e Comércio S/A | R$ 2.51 | R$ 2.97 | **-15.49%** 📉 | -39.30% ⬇️ |
-| INEP4.SA | Inepar S.A. Indústria e Construções | R$ 1.00 | R$ 1.15 | **-13.04%** 📉 | +7.28% ⬆️ |
-| TOKY3.SA | Grupo Toky S.A. | R$ 3.70 | R$ 4.11 | **-9.98%** 📉 | -1.25% ⬇️ |
-| DOTZ3.SA | Dotz S.A. | R$ 5.90 | R$ 6.40 | **-7.81%** 📉 | +92.46% ⬆️ |
+| EQPA7.SA | Equatorial Pará Distribuidora de Energia S.A. | R$ 6.50 | R$ 7.58 | **-14.25%** 📉 | 0.00% — |
+| AALR3.SA | Alliança Saúde e Participações S.A. | R$ 0.64 | R$ 0.74 | **-13.51%** 📉 | 0.00% — |
+| BRKM5.SA | Braskem S.A. | R$ 2.24 | R$ 2.50 | **-10.40%** 📉 | 0.00% — |
+| PLAS3.SA | Plascar Participações Industriais S.A. | R$ 3.50 | R$ 3.90 | **-10.26%** 📉 | 0.00% — |
+| NORD3.SA | Nordon Indústrias Metalúrgicas S/A | R$ 1.00 | R$ 1.11 | **-9.91%** 📉 | 0.00% — |
